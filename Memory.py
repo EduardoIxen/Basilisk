@@ -17,13 +17,33 @@ class Memomry:
             'Descripcion': 'Palabra reservada para declarar una variable'
         },
         {
-            'Nombre': 'tk_AbrirComentario',
-            'Valor': '/*',
-            'Descripcion': 'Inicia un comentario'
+            'Nombre': 'tk_true',
+            'Valor': 'true',
+            'Descripcion': 'Booleano verdadero'
         },
         {
-            'Nombre': 'tk_CerrarComentario',
-            'Valor': '*/',
-            'Descripcion': 'Finaliza un comentario'
+            'Nombre': 'tk_false',
+            'Valor': 'false',
+            'Descripcion': 'Booleano falso'
+        },
+        {
+            'Nombre': 'tk_if',
+            'Valor': 'if',
+            'Descripcion': 'Sentencia de control if'
+        },
+        {
+            'Nombre': 'tk_while',
+            'Valor': 'while',
+            'Descripcion': 'Sentencia de ciclo con condicion'
+        },
+        {
+            'Nombre': 'tk_foreach',
+            'Valor': 'foreach',
+            'Descripcion': 'Sentencia de ciclo repetitivo'
+        },
+        {
+            'Nombre': 'tk_in',
+            'Valor': 'in',
+            'Descripcion': 'Palabra reservada para condiciones de foreach'
         }
                 ]
