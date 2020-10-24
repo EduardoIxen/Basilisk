@@ -1,5 +1,6 @@
 from Memory import *
 from CargarArchivo import *
+from Reporte import *
 print("comenzando")
 ruta = input("Ingrese la ruta del archivo\n")
 print(ruta)
@@ -74,21 +75,59 @@ for linea in Memomry.content_script:
                 cadena += current
                 startComent = columna
             elif current.isalpha() or current == '_':
+                startComent = columna
                 cadena += current
                 estado = 2
+                #print("volvio a cadena",estado)
+            elif current == ' ':
+                estado = 0
+                #print("vacio")
+            elif current = '"':
+                
         elif estado == 1:
             if current == '/' and linea[i-1] == '*':
                 cadena += current
                 print('comentario final', cadena)
                 token = {'Nombre': 'tk_Comentario', 'Valor': cadena, 'Descripcion': 'Es un comentario', 'Linea': num_linea, 'Columna': startComent}
                 print(token)
+                lexemas.append(token)
                 estado = 0
                 cadena = ''
             else:
                 if current != '\n':
                     cadena += current
         elif estado == 2:
-            
-
+            if current != " ":
+                cadena += current
+                for token in Memomry.lista_tk:
+                    if token.get('Valor') == cadena:
+                        newToken = {'Nombre': token.get('Nombre'), 'Valor': token.get('Valor'), 'Descripcion': token.get('Descripcion'), 'Linea': num_linea, 'Columna': startComent}
+                        print(newToken)
+                        lexemas.append(newToken)
+                        cadena = ''
+                        estado = 0
+                        #print(estado)
+            else:
+#                print('espacio')
+#                print(cadena)
+                flag = True
+                for token in Memomry.lista_tk:
+                    if token.get('Valor') == cadena:
+                        newToken = {'Nombre': token.get('Nombre'), 'Valor': token.get('Valor'), 'Descripcion': token.get('Descripcion'), 'Linea': num_linea, 'Columna': startComent}
+                        print(newToken)
+                        lexemas.append(newToken)
+                        cadena = ''
+                        estado = 0
+                        flag = False
+#                        print(estado)
+                if flag:
+                    newToken = {'Nombre': 'tk_Identificador', 'Valor': cadena,
+                                'Descripcion': 'Palabra que funciona como identificador', 'Linea': num_linea, 'Columna': startComent}
+                    print(newToken)
+                    lexemas.append(newToken)
+                    cadena = ''
+                    estado = 0
 
     num_linea += 1
+repo = Reporte()
+repo.crearHtml(lexemas)
