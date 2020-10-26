@@ -6,6 +6,7 @@ const _identificador1 = true;
 var identificador2 = "Ejemplo cadena";
 let identificador_3 = -32;
 const _three_3_33 = 3;
+const _four_4_44 = 3.53232;
 if(id){
 	/*Contenido del if*/
 }
@@ -57,7 +58,7 @@ switch(id){
 	case 2:
 		var _caso = "Sin break";
 }
-const funcion1 = (parametro1) => {
+const @ funcion1 = (parametro1) => {
 	if (id) {
 		let _nombre = "Eduardo";
 	}
@@ -82,8 +83,7 @@ funcion2(false, 22, "Rucuch");
 funcion3("Eduardo", "Tomas", "Ixen", "Rucuch");
 funcion4(12, -3, +21, false);
 
-
-
-
-
+let prueba = 12;
+let prueba2 = 13.2;
+let prueba3 = 12.;
 

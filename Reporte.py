@@ -3,7 +3,7 @@ from tabulate import *
 import os.path
 
 class Reporte:
-    def crearHtml(self, lista):
+    def crearHtml(self, lista, titulo):
         if lista != []:
             contador = 0
             listaFormateada = []
@@ -25,7 +25,7 @@ class Reporte:
             contenidoTabla = contenidoTabla.replace('right','center')
             contenidoTabla = contenidoTabla.replace('<td>', '<td style="text-align: center;">')
 
-            file =open(f"Reportes/tokens.html", "w")
+            file =open(f"Reportes/{titulo}.html", "w")
 
             file.write('<!DOCTYPE html>')
             file.write('<html>')
@@ -44,7 +44,7 @@ class Reporte:
             file.write('</head>')
             file.write('<body>')
             file.write('<center>')
-            file.write('<h1>Registros</h1>')
+            file.write(f'<h1>{titulo}</h1>')
             file.write(contenidoTabla)
             file.write('</center>')
             file.write('</body>')
@@ -52,10 +52,10 @@ class Reporte:
             file.close()
 
             #obtiene la ruta absoluta del archivo
-            opcion = input("Desea abrir el archivo? S/N\n")
+            opcion = input(f"Desea abrir el reporte {titulo}? S/N\n")
             if opcion == "S" or opcion == "s" or opcion == "SI" or opcion == "si" or opcion == "Si":
                 my_path = os.path.abspath(os.path.dirname(__file__))
-                path = os.path.join(my_path, f"../Reportes/tokens.html")
+                path = os.path.join(my_path, f"../Reportes/{titulo}.html")
                 path = path.replace("\\","/")
                 path = path.replace("../","")
                 webbrowser.open_new_tab(path)

@@ -45,5 +45,35 @@ class Memomry:
             'Nombre': 'tk_in',
             'Valor': 'in',
             'Descripcion': 'Palabra reservada para condiciones de foreach'
+        },
+        {
+            'Nombre': 'tk_PrarentesisA',
+            'Valor': '(',
+            'Descripcion': 'Indica el inicio del espacio para parametros de una funcion o sentencia'
+        },
+        {
+            'Nombre': 'tk_PrarentesisC',
+            'Valor': ')',
+            'Descripcion': 'Indica el final del espacio para parametros de una funcion o sentencia'
+        },
+        {
+            'Nombre': 'tk_Case',
+            'Valor': 'case',
+            'Descripcion': 'Casos diferentes para switch'
+        },
+        {
+            'Nombre': 'tk_Switch',
+            'Valor': 'switch',
+            'Descripcion': 'Sentencia para evaluar casos diferentes'
+        },
+        {
+            'Nombre': 'tk_Break',
+            'Valor': 'break',
+            'Descripcion': 'Indica el final de un caso de switch'
+        },
+        {
+            'Nombre': 'tk_Default',
+            'Valor': 'default',
+            'Descripcion': 'Operacion por defecto para un switch'
         }
                 ]
