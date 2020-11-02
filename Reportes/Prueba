@@ -33,91 +33,91 @@ digraph {
 	{
 		rank=same
 		8 [label="Sentencia if"]
-		8 -> 10
+		8 -> 11
 	}
 	{
 		rank=same
-		10 [label="Sentencia if"]
-		10 -> 13
+		11 [label="Sentencia if"]
+		11 -> 14
 	}
 	{
 		rank=same
-		13 [label="Sentencia while"]
-		13 -> 18
+		14 [label="Sentencia while"]
+		14 -> 19
 	}
 	{
 		rank=same
-		18 [label="Sentencia while"]
-		18 -> 19
+		19 [label="Sentencia while"]
+		19 -> 21
 	}
 	{
 		rank=same
-		19 [label="Sentencia foreach"]
-		19 -> 25
+		21 [label="Sentencia foreach"]
+		21 -> 28
 	}
 	{
 		rank=same
-		25 [label="Sentencia switch"]
-		25 -> 34
+		28 [label="Sentencia switch"]
+		28 -> 36
 	}
 	{
 		rank=same
-		34 [label="Sentencia switch"]
-		34 -> 38
+		36 [label="Sentencia switch"]
+		36 -> 39
 	}
 	{
 		rank=same
-		38 [label="Definicion: funcion1"]
-		38 -> 43
+		39 [label="Definicion: funcion1"]
+		39 -> 44
 	}
 	{
 		rank=same
-		43 [label="Definicion: funcion2"]
-		43 -> 48
+		44 [label="Definicion: funcion2"]
+		44 -> 49
 	}
 	{
 		rank=same
-		48 [label="Definicion: funcion3"]
-		48 -> 53
+		49 [label="Definicion: funcion3"]
+		49 -> 54
 	}
 	{
 		rank=same
-		53 [label="Definicion: funcion4"]
-		53 -> 58
+		54 [label="Definicion: funcion4"]
+		54 -> 59
 	}
 	{
 		rank=same
-		58 [label="Llamada funcion1"]
-		58 -> 59
+		59 [label="Llamada funcion1"]
+		59 -> 61
 	}
 	{
 		rank=same
-		59 [label="Llamada funcion2"]
-		59 -> 60
+		61 [label="Llamada funcion2"]
+		61 -> 63
 	}
 	{
 		rank=same
-		60 [label="Llamada funcion3"]
-		60 -> 61
+		63 [label="Llamada funcion3"]
+		63 -> 65
 	}
 	{
 		rank=same
-		61 [label="Llamada funcion4"]
-		61 -> 62
+		65 [label="Llamada funcion4"]
+		65 -> 67
 	}
 	{
 		rank=same
-		62 [label="Asignacion: prueba"]
-		62 -> 63
+		67 [label="Asignacion: prueba"]
+		67 -> 68
 	}
 	{
 		rank=same
-		63 [label="Asignacion: prueba2"]
-		63 -> 64
+		68 [label="Asignacion: prueba2"]
+		68 -> 69
 	}
 	{
 		rank=same
-		64 [label="Asignacion: prueba3"]
+		69 [label="Asignacion: prueba3"]
 	}
 	{
 		rank=2
@@ -126,108 +126,138 @@ digraph {
 	}
 	{
 		rank=2
-		9 [label="Asignacion: variable"]
+		9 [label="Condicion: true"]
+		8 -> 9
 	}
 	{
 		rank=2
-		11 [label="Sentencia while"]
+		10 [label="Asignacion: variable"]
+		9 -> 10
 	}
 	{
 		rank=2
-		14 [label="Condicion: identidicador"]
-		13 -> 14
+		12 [label="Condicion: false"]
+		11 -> 12
+	}
+	{
+		rank=2
+		13 [label="Sentencia while"]
+		12 -> 13
 	}
 	{
 		rank=2
 		15 [label="Sentencia if"]
+		14 -> 15
 	}
 	{
 		rank=2
-		20 [label="elemento in coleccion"]
+		20 [label="Condicion: true"]
 		19 -> 20
 	}
 	{
 		rank=2
-		21 [label="Sentencia if"]
+		22 [label="elemento in coleccion"]
+		21 -> 22
 	}
 	{
 		rank=2
-		26 [label="Condicion: identidicador"]
-		25 -> 26
+		23 [label="Sentencia if"]
+		22 -> 23
 	}
 	{
 		rank=2
-		27 [label="Asignacion: vasSwitch"]
+		29 [label="Asignacion: vasSwitch"]
+		28 -> 29
 	}
 	{
 		rank=2
-		28 [label="Asignacion: vasSwitch2"]
+		30 [label="Asignacion: vasSwitch2"]
+		29 -> 30
 	}
 	{
 		rank=2
-		29 [label="Asignacion: _idSW"]
+		31 [label="Asignacion: _idSW"]
+		30 -> 31
 	}
 	{
 		rank=2
-		30 [label="Sentencia if"]
+		32 [label="Sentencia if"]
+		31 -> 32
 	}
 	{
 		rank=2
-		33 [label="Asignacion: def1"]
-	}
-	{
-		rank=2
-		35 [label="Condicion: id"]
+		35 [label="Asignacion: def1"]
 		34 -> 35
 	}
 	{
 		rank=2
-		36 [label="Asignacion: _identificador_sw"]
+		37 [label="Asignacion: _identificador_sw"]
+		36 -> 37
 	}
 	{
 		rank=2
-		37 [label="Asignacion: _caso"]
+		38 [label="Asignacion: _caso"]
+		37 -> 38
 	}
 	{
 		rank=2
-		39 [label="Parametros:   parametro1"]
-		38 -> 39
+		40 [label="Parametros: parametro1"]
+		39 -> 40
 	}
 	{
 		rank=2
-		40 [label="Sentencia if"]
+		41 [label="Sentencia if"]
+		40 -> 41
 	}
 	{
 		rank=2
-		44 [label="Parametros:   parametro1  parametro2"]
-		43 -> 44
+		45 [label="Parametros: parametro1, parametro2"]
+		44 -> 45
 	}
 	{
 		rank=2
-		45 [label="Sentencia if"]
+		46 [label="Sentencia if"]
+		45 -> 46
 	}
 	{
 		rank=2
-		49 [label="Parametros:   parametro1  parametro2  parametro3"]
-		48 -> 49
+		50 [label="Parametros: parametro1, parametro2, parametro3"]
+		49 -> 50
 	}
 	{
 		rank=2
-		50 [label="Sentencia if"]
+		51 [label="Sentencia if"]
+		50 -> 51
 	}
 	{
 		rank=2
-		54 [label="Parametros: "]
-		53 -> 54
+		55 [label="Parametros: "]
+		54 -> 55
 	}
 	{
 		rank=2
-		55 [label="Sentencia if"]
+		56 [label="Sentencia if"]
+		55 -> 56
 	}
 	{
-		rank=3
-		12 [label="Condicion: id"]
-		11 -> 12
+		rank=2
+		60 [label="Parametros: true, 12, \"Tomas\""]
+		59 -> 60
+	}
+	{
+		rank=2
+		62 [label="Parametros: false, 22, \"Rucuch\""]
+		61 -> 62
+	}
+	{
+		rank=2
+		64 [label="Parametros: \"Eduardo\", \"Tomas\", \"Ixen\", \"Rucuch\""]
+		63 -> 64
+	}
+	{
+		rank=2
+		66 [label="Parametros: 12, 3, 21, false"]
+		65 -> 66
 	}
 	{
 		rank=3
@@ -237,63 +267,81 @@ digraph {
 	{
 		rank=3
 		17 [label="Asignacion: _var_1"]
+		16 -> 17
 	}
 	{
 		rank=3
-		22 [label="Condicion: id"]
-		21 -> 22
+		18 [label="Condicion: true"]
+		17 -> 18
 	}
 	{
 		rank=3
-		23 [label="Sentencia while"]
+		24 [label="Condicion: id"]
+		23 -> 24
 	}
 	{
 		rank=3
-		31 [label="Condicion: id"]
-		30 -> 31
+		25 [label="Sentencia while"]
+		24 -> 25
 	}
 	{
 		rank=3
-		32 [label="Asignacion: _aceptado"]
+		33 [label="Condicion: id"]
+		32 -> 33
 	}
 	{
 		rank=3
-		41 [label="Condicion: id"]
-		40 -> 41
+		34 [label="Asignacion: _aceptado"]
+		33 -> 34
 	}
 	{
 		rank=3
-		42 [label="Asignacion: _nombre"]
+		42 [label="Condicion: id"]
+		41 -> 42
 	}
 	{
 		rank=3
-		46 [label="Condicion: id"]
-		45 -> 46
+		43 [label="Asignacion: _nombre"]
+		42 -> 43
 	}
 	{
 		rank=3
-		47 [label="Asignacion: _nombre"]
+		47 [label="Condicion: id"]
+		46 -> 47
 	}
 	{
 		rank=3
-		51 [label="Condicion: id"]
-		50 -> 51
+		48 [label="Asignacion: _nombre"]
+		47 -> 48
 	}
 	{
 		rank=3
-		52 [label="Asignacion: _apellido"]
+		52 [label="Condicion: id"]
+		51 -> 52
 	}
 	{
 		rank=3
-		56 [label="Condicion: id"]
-		55 -> 56
+		53 [label="Asignacion: _apellido"]
+		52 -> 53
 	}
 	{
 		rank=3
-		57 [label="Asignacion: _apellido"]
+		57 [label="Condicion: id"]
+		56 -> 57
+	}
+	{
+		rank=3
+		58 [label="Asignacion: _apellido"]
+		57 -> 58
 	}
 	{
 		rank=4
-		24 [label="Asignacion: aceptado"]
+		26 [label="Condicion: true"]
+		25 -> 26
+	}
+	{
+		rank=4
+		27 [label="Asignacion: aceptado"]
+		26 -> 27
 	}
 }

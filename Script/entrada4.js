@@ -7,6 +7,8 @@ const funcion1 = (parametro1,parametro2){
 }
 if (id) {
     /*contenido*/
+    if(pruebaNivel){
+    }
 }
 while (id2) {
 
@@ -22,3 +24,9 @@ print();
 if (true) {
 
 }
+if (false) {
+
+}
+while(true){
+}
+funcionPrueba(4, 3, true, variable1, "Holaaa");

@@ -344,9 +344,12 @@ def diagrama():
     nivel = 1
     listNivel = []
     parametros = False
+    parametrosLlamada = False
     listParametros = []
+    listParametrosLlamada = []
     foreachON = False
     ifOn = False
+    whileOn = False
     for i in range(len(temp)):
         if temp[i]["Nombre"] == 'tk_const' or temp[i]["Nombre"] == 'tk_var' or temp[i]["Nombre"] == 'tk_let':
             if temp[i+3]["Nombre"] == 'tk_ParentesisA':
@@ -357,6 +360,8 @@ def diagrama():
                 nodo["Nivel"] = nivel
                 nodo["Contenido"] = f"Definicion: {valor}"
                 nodo["Clave"] = str(contId)
+                if nivel > 1:
+                    nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
                 nivel += 1
                 sumNivel(nivel, listNivel)
@@ -369,6 +374,8 @@ def diagrama():
                 nodo["Nivel"] = nivel
                 nodo["Contenido"] = f"Asignacion: {valor}"
                 nodo["Clave"] = str(contId)
+                if nivel > 1:
+                    nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
         elif temp[i]["Nombre"] == 'tk_if':
             print("nivel if", nivel)
@@ -377,6 +384,8 @@ def diagrama():
             nodo["Nivel"] = nivel
             nodo["Contenido"] = f"Sentencia if"
             nodo["Clave"] = str(contId)
+            if nivel > 1:
+                nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
             nodos.append(nodo)
             nivel += 1
             sumNivel(nivel, listNivel)
@@ -388,16 +397,21 @@ def diagrama():
             nodo["Nivel"] = nivel
             nodo["Contenido"] = f"Sentencia while"
             nodo["Clave"] = str(contId)
+            if nivel > 1:
+                nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
             nodos.append(nodo)
             nivel += 1
             sumNivel(nivel, listNivel)
             print("nivel final while", nivel)
+            whileOn = True
         elif temp[i]["Nombre"] == 'tk_foreach':
             contId += 1
             nodo = {}
             nodo["Nivel"] = nivel
             nodo["Contenido"] = f"Sentencia foreach"
             nodo["Clave"] = str(contId)
+            if nivel > 1:
+                nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
             nodos.append(nodo)
             nivel += 1
             sumNivel(nivel, listNivel)
@@ -408,6 +422,8 @@ def diagrama():
             nodo["Nivel"] = nivel
             nodo["Contenido"] = f"Sentencia switch"
             nodo["Clave"] = str(contId)
+            if nivel > 1:
+                nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
             nodos.append(nodo)
             nivel += 1
             sumNivel(nivel, listNivel)
@@ -419,7 +435,11 @@ def diagrama():
                 nodo["Contenido"] = f"Llamada {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodos.append(nodo)
-            elif temp[i - 1]["Nombre"] == "tk_ParentesisA" and temp[i + 1]["Nombre"] == "tk_ParentesisC" and parametros == False:
+                nivel += 1
+                sumNivel(nivel, listNivel)
+                parametros = True
+                parametrosLlamada = True
+            elif temp[i - 1]["Nombre"] == "tk_ParentesisA" and temp[i + 1]["Nombre"] == "tk_ParentesisC" and parametros == False and ifOn == True:
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
@@ -427,18 +447,28 @@ def diagrama():
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos)-1]["Clave"]
                 nodos.append(nodo)
+                ifOn = False #quitar si arruina toodo
             elif parametros == True:
                 listParametros.append(temp[i]["Valor"])
 
         elif temp[i]["Nombre"] == "tk_LlaveC":
             nivel = nivel - 1
             print("llave c nivel", nivel)
+        elif temp[i]["Nombre"] == "tk_PuntoYComa" and parametrosLlamada == True:
+            nivel = nivel - 1
+            parametrosLlamada = False
         elif temp[i]["Nombre"] == "tk_ParentesisC":
             if parametros:
-                listParametros.pop(0)
+                if parametrosLlamada:
+                    listParametros = listParametros
+                else:
+                    listParametros.pop(0)
                 parametrosStr = ""
-                for elemento in listParametros:
-                    parametrosStr += "  "+elemento
+                for j in range(len(listParametros)):
+                    if j <= len(listParametros) - 2:
+                        parametrosStr += listParametros[j] + ", "
+                    else:
+                        parametrosStr += listParametros[j]
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
@@ -448,17 +478,44 @@ def diagrama():
                 nodos.append(nodo)
                 parametros = False
                 listParametros = []
+                #parametrosLlamada = False
             elif foreachON:
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"{temp[i-3]['Valor']} in {temp[i-1]['Valor']}"
+                nodo["Contenido"] = f"{temp[i - 3]['Valor']} in {temp[i - 1]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
                 foreachON = False
-        elif temp[i]["Nombre"] == "s":
-            d = 0
+
+        elif temp[i]["Nombre"] == "tk_true" or temp[i]["Nombre"] == "tk_false":
+            if ifOn == True and parametrosLlamada == False:
+                contId += 1
+                nodo = {}
+                nodo["Nivel"] = nivel
+                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
+                nodo["Clave"] = str(contId)
+                nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
+                nodos.append(nodo)
+                ifOn = False
+            elif whileOn:
+                contId += 1
+                nodo = {}
+                nodo["Nivel"] = nivel
+                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
+                nodo["Clave"] = str(contId)
+                nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
+                nodos.append(nodo)
+                whileOn = False
+            elif parametrosLlamada:
+                listParametros.append(temp[i]["Valor"])
+        elif temp[i]["Nombre"] == "tk_Numero":
+            if parametrosLlamada:
+                listParametros.append(temp[i]["Valor"])
+        elif temp[i]["Nombre"] == "tk_Cadena":
+            if parametrosLlamada:
+                listParametros.append(temp[i]["Valor"])
         else:
             v = 0
 
