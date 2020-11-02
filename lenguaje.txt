@@ -1,0 +1,66 @@
+S => declaracionVariables, S
+    |sentencia_if, S
+    |sentencia_while, S
+    |sentencia_foreach, S
+    |sentencia_switch, S
+    |def_funciones, S
+    |llamada_funciones, S
+
+contenido => declaracionVariables, contenido
+            |sentencia_if, contenido
+            |sentencia_while, contenido
+            |sentencia_foreach, contenido
+            |sentencia_switch, contenido
+            |def_funciones, contenido
+            |llamada_funciones, contenido
+
+declaracionVariables => tipoVariable, indentificador, token_= , valor , token_;
+
+tipoVariable => let
+                |var
+                |const
+
+valor => numero
+        | cadena
+        | booleano
+
+booleano => true
+            |false
+
+
+sentencia_if => token_if, tk_(, booleano | identificador , tk_), tk_{, contenido, tk_}
+
+sentencia_while => token_while, tk_(, booleano | identificador , tk_), tk_{, contenido, tk_}
+
+sentencia_foreach => tk_foreach, identificador, tk_in, identificador, tk_), tk_{, contenido, tk_}
+
+sentencia_switch => tk_switch, tk_(, identificador, tk_), tk_{, cases , tk_}
+
+cases => case, cases
+        |default
+        |vacio
+
+case => tk_case, valor, tk_:, contenido, posible_break
+
+default => tk_default, tk_:, contenido, posible_break
+
+posible_break => tk_break, tk_;
+                | vacio
+
+def_funciones => tipoVariable, identificador, tk_=, tk_(, parametros, tk_), tk_=>, tk_{, contenido, tk_}
+
+parametros => parametro, parametros
+            | vacio
+
+parametro => identificador, tk_,
+            |identificador
+
+llamada_funcion => identificador, tk_(, parametros2, tk_), tk_;
+
+parametros2 => valor2, parametros2
+            |vacio
+
+valor2 => numero
+        |cadena
+        | booleano
+        |,

@@ -1,6 +1,7 @@
 import webbrowser
 from tabulate import *
 import os.path
+from Memory import *
 
 class Reporte:
     def crearHtml(self, lista, titulo):
@@ -52,12 +53,13 @@ class Reporte:
             file.close()
 
             #obtiene la ruta absoluta del archivo
-            opcion = input(f"Desea abrir el reporte {titulo}? S/N\n")
-            if opcion == "S" or opcion == "s" or opcion == "SI" or opcion == "si" or opcion == "Si":
-                my_path = os.path.abspath(os.path.dirname(__file__))
-                path = os.path.join(my_path, f"../Reportes/{titulo}.html")
-                path = path.replace("\\","/")
-                path = path.replace("../","")
-                webbrowser.open_new_tab(path)
-            else:
-                print("Archivo guardado en la carpeta 'Reportes'")
+            if Memomry.createReport:
+                opcion = input(f"Desea abrir el reporte {titulo}? S/N\n")
+                if opcion == "S" or opcion == "s" or opcion == "SI" or opcion == "si" or opcion == "Si":
+                    my_path = os.path.abspath(os.path.dirname(__file__))
+                    path = os.path.join(my_path, f"../Reportes/{titulo}.html")
+                    path = path.replace("\\","/")
+                    path = path.replace("../","")
+                    webbrowser.open_new_tab(path)
+                else:
+                    print("Archivo guardado en la carpeta 'Reportes'")

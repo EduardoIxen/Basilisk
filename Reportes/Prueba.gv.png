@@ -1,0 +1,8 @@
+digraph {
+	A [label="King Arthur"]
+	B [label="Sir Bedever"]
+	L [label="Sir Lancelot"]
+	A -> B
+	A -> L
+	B -> L [constraint=false]
+}
