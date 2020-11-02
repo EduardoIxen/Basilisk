@@ -350,6 +350,9 @@ def diagrama():
     foreachON = False
     ifOn = False
     whileOn = False
+    switchOn = False
+    contCase = 1
+    saveNivSwitch = 0
     for i in range(len(temp)):
         if temp[i]["Nombre"] == 'tk_const' or temp[i]["Nombre"] == 'tk_var' or temp[i]["Nombre"] == 'tk_let':
             if temp[i+3]["Nombre"] == 'tk_ParentesisA':
@@ -368,7 +371,7 @@ def diagrama():
                 parametros = True
             else:
                 contId += 1
-                print("variable", temp[i]["Linea"])
+                #print("variable", temp[i]["Linea"])
                 valor = temp[i+1]["Valor"]
                 nodo = {}
                 nodo["Nivel"] = nivel
@@ -378,7 +381,7 @@ def diagrama():
                     nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
         elif temp[i]["Nombre"] == 'tk_if':
-            print("nivel if", nivel)
+            #print("nivel if", nivel)
             contId += 1
             nodo = {}
             nodo["Nivel"] = nivel
@@ -391,7 +394,7 @@ def diagrama():
             sumNivel(nivel, listNivel)
             ifOn = True
         elif temp[i]["Nombre"] == 'tk_while':
-            print("nivel while",nivel)
+            #print("nivel while",nivel)
             contId += 1
             nodo = {}
             nodo["Nivel"] = nivel
@@ -402,7 +405,7 @@ def diagrama():
             nodos.append(nodo)
             nivel += 1
             sumNivel(nivel, listNivel)
-            print("nivel final while", nivel)
+            #print("nivel final while", nivel)
             whileOn = True
         elif temp[i]["Nombre"] == 'tk_foreach':
             contId += 1
@@ -417,6 +420,7 @@ def diagrama():
             sumNivel(nivel, listNivel)
             foreachON = True
         elif temp[i]["Nombre"] == 'tk_Switch':
+            saveNivSwitch = nivel
             contId += 1
             nodo = {}
             nodo["Nivel"] = nivel
@@ -427,6 +431,7 @@ def diagrama():
             nodos.append(nodo)
             nivel += 1
             sumNivel(nivel, listNivel)
+            switchOn = True
         elif temp[i]["Nombre"] == "tk_Identificador":
             if temp[i + 1]["Nombre"] == 'tk_ParentesisA' and parametros == False:
                 contId += 1
@@ -439,21 +444,26 @@ def diagrama():
                 sumNivel(nivel, listNivel)
                 parametros = True
                 parametrosLlamada = True
-            elif temp[i - 1]["Nombre"] == "tk_ParentesisA" and temp[i + 1]["Nombre"] == "tk_ParentesisC" and parametros == False and ifOn == True:
+            elif temp[i - 1]["Nombre"] == "tk_ParentesisA" and temp[i + 1]["Nombre"] == "tk_ParentesisC" and parametros == False and parametrosLlamada == False:
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
+                nodo["Contenido"] = f"Condicion id: {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos)-1]["Clave"]
                 nodos.append(nodo)
                 ifOn = False #quitar si arruina toodo
+                whileOn = False
             elif parametros == True:
                 listParametros.append(temp[i]["Valor"])
 
         elif temp[i]["Nombre"] == "tk_LlaveC":
             nivel = nivel - 1
-            print("llave c nivel", nivel)
+            if switchOn:
+                print("nivel en switch: ", nivel)
+                nivel = saveNivSwitch
+                switchOn = False
+
         elif temp[i]["Nombre"] == "tk_PuntoYComa" and parametrosLlamada == True:
             nivel = nivel - 1
             parametrosLlamada = False
@@ -494,16 +504,16 @@ def diagrama():
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
+                nodo["Contenido"] = f"Condicion if: {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
                 ifOn = False
-            elif whileOn:
+            elif whileOn == True:
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
+                nodo["Contenido"] = f"Condicion while: {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
@@ -514,8 +524,31 @@ def diagrama():
             if parametrosLlamada:
                 listParametros.append(temp[i]["Valor"])
         elif temp[i]["Nombre"] == "tk_Cadena":
-            if parametrosLlamada:
+            if parametrosLlamada and temp[i - 1]["Nombre"] != "tk_Case":
                 listParametros.append(temp[i]["Valor"])
+                #print("Entro a la caadena, ", contId)
+        elif temp[i]["Nombre"] == "tk_Case":
+            nivel += 1
+            sumNivel(nivel,listNivel)
+            contId += 1
+            nodo = {}
+            nodo["Nivel"] = nivel
+            nodo["Contenido"] = f"Case {temp[i+1]['Valor']}"
+            nodo["Clave"] = str(contId)
+            nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
+            nodos.append(nodo)
+            print("nivel case", nivel)
+            contCase += 1
+        elif temp[i]["Nombre"] == "tk_Default":
+            nivel += 1
+            sumNivel(nivel, listNivel)
+            contId += 1
+            nodo = {}
+            nodo["Nivel"] = nivel
+            nodo["Contenido"] = f"Default"
+            nodo["Clave"] = str(contId)
+            nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
+            nodos.append(nodo)
         else:
             v = 0
 
@@ -539,7 +572,7 @@ def diagrama():
     for numero in listNivel:
         for i in range(len(nodos)):
             if nodos[i]["Nivel"] == numero and numero != 1:
-                print("numerooo",numero)
+                #print("numerooo",numero)
                 with dot.subgraph() as niv2:
                     niv2.attr(rank=f'{numero}')
                     niv2.node(nodos[i]["Clave"], nodos[i]["Contenido"])

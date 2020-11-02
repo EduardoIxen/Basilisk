@@ -40,7 +40,7 @@ switch(identidicador) {
 	case true:
 		const vasSwitch2 = "Hola sw!";
 	break;
-	case "Hola en switch":
+	case "PruebaCaseCadena":
 		let _idSW = true;
 	break;
 	case 2:
