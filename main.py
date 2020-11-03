@@ -439,6 +439,8 @@ def diagrama():
                 nodo["Nivel"] = nivel
                 nodo["Contenido"] = f"Llamada {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
+                if nivel > 1:
+                    nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
                 nivel += 1
                 sumNivel(nivel, listNivel)
@@ -448,7 +450,7 @@ def diagrama():
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"Condicion id: {temp[i]['Valor']}"
+                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos)-1]["Clave"]
                 nodos.append(nodo)
@@ -504,7 +506,7 @@ def diagrama():
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"Condicion if: {temp[i]['Valor']}"
+                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
@@ -513,7 +515,7 @@ def diagrama():
                 contId += 1
                 nodo = {}
                 nodo["Nivel"] = nivel
-                nodo["Contenido"] = f"Condicion while: {temp[i]['Valor']}"
+                nodo["Contenido"] = f"Condicion: {temp[i]['Valor']}"
                 nodo["Clave"] = str(contId)
                 nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
