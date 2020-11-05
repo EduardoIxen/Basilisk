@@ -4,6 +4,7 @@ from Reporte import *
 from Pila import *
 from graphviz import Digraph
 
+
 def main():
     opcion = 0
     while(opcion != "5"):
@@ -25,11 +26,17 @@ def main():
         elif opcion == "3":
             if Memomry.content_script != []:
                 Memomry.createReport = False
+                manejoAFD()
                 AP()
             else:
                 print("ERROR// NO EXISTEN ARCHIVOS CARGADOS")
         elif opcion == "4":
-            diagrama()
+            if Memomry.content_script != []:
+                Memomry.createReport = False
+                manejoAFD()
+                diagrama()
+            else:
+                print("ERROR// NO EXISTEN ARCHIVOS CARGADOS")
         elif opcion == "5":
             print("Saliendo...")
             exit(0)
@@ -72,49 +79,49 @@ def manejoAFD():
                 if current == ',':
                     #print('current:', current)
                     token = {'Nombre': 'tk_coma', 'Valor': ',', 'Descripcion': 'Separador de atributos', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == '{':
                     #print('current:', current)
                     token = {'Nombre': 'tk_LlaveA', 'Valor': '{', 'Descripcion': 'Indica el inicio del contenido de una funcion o sentencia', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == '}':
                     #print('current:', current)
                     token = {'Nombre': 'tk_LlaveC', 'Valor': '}', 'Descripcion': 'Indica el final del contenido de una funcion o sentencia', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == '(':
                     #print('current:', current)
                     token = {'Nombre': 'tk_ParentesisA', 'Valor': '(', 'Descripcion': 'Indica el inicio del espacio para parametros de una funcion o sentencia', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == ')':
                     #print('current:', current)
                     token = {'Nombre': 'tk_ParentesisC', 'Valor': ')', 'Descripcion': 'Indica el final del espacio para parametros de una funcion o sentencia', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == ';':
                     #print('current:', current)
                     token = {'Nombre': 'tk_PuntoYComa', 'Valor': ';', 'Descripcion': 'Finaliza una asignacion o sentencia', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == ':':
                     #print('current:', current)
                     token = {'Nombre': 'tk_DosPuntos', 'Valor': ':', 'Descripcion': 'Inicio de procedimientos para casos de switch', 'Linea': num_linea, 'Columna': columna}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                 elif current == '=':
                     if linea[i+1] != '>':
                         token = {'Nombre': 'tk_Igual', 'Valor': '=', 'Descripcion': 'Indica asignacion de un valos', 'Linea': num_linea, 'Columna': columna}
-                        print(token)
+                        #print(token)
                         lexemas.append(token)
                     else:
                         cadena += current
                         startComent = columna
                 elif current == '>' and cadena == '=':
                     token = {'Nombre': 'tk_Flecha', 'Valor': '=>', 'Descripcion': 'Flecha para funciones', 'Linea': num_linea, 'Columna': startComent}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                     cadena = ''
                 elif current == '/' and linea[i+1] == '*':
@@ -159,9 +166,9 @@ def manejoAFD():
             elif estado == 1:
                 if current == '/' and linea[i-1] == '*':
                     cadena += current
-                    print('comentario final', cadena)
+                    #print('comentario final', cadena)
                     token = {'Nombre': 'tk_Comentario', 'Valor': cadena, 'Descripcion': 'Es un comentario', 'Linea': num_linea, 'Columna': startComent}
-                    print(token)
+                    #print(token)
                     lexemas.append(token)
                     estado = 0
                     cadena = ''
@@ -183,9 +190,9 @@ def manejoAFD():
                     for token in Memomry.lista_tk:
                         if token.get('Valor') == cadena:
                             newToken = {'Nombre': token.get('Nombre'), 'Valor': token.get('Valor'), 'Descripcion': token.get('Descripcion'), 'Linea': num_linea, 'Columna': startComent}
-                            print(newToken)
+                            #print(newToken)
                             lexemas.append(newToken)
-                            print("estado 2 else vacio", newToken)
+                            #print("estado 2 else vacio", newToken)
                             cadena = ''
                             estado = 0
                             flag = False
@@ -193,23 +200,23 @@ def manejoAFD():
                     if flag:
                         newToken = {'Nombre': 'tk_Identificador', 'Valor': cadena,
                                     'Descripcion': 'Palabra que funciona como identificador', 'Linea': num_linea, 'Columna': startComent}
-                        print(newToken)
+                        #print(newToken)
                         lexemas.append(newToken)
-                        print("estado 2 if flag", newToken)
+                        #print("estado 2 if flag", newToken)
                         cadena = ''
                         estado = 0
                 try:
                     if linea[i+1] == '(' or linea[i+1] == ')' or linea[i+1] == '{' or linea[i+1] == '}' or linea[i+1] == ';'\
                             or linea[i+1] == ':' or linea[i+1] == '=' or linea[i+1] == ',':
                         if cadena != "":
-                            print("cadena", len(cadena))
+                            #print("cadena", len(cadena))
                             flag = True
                             for token in Memomry.lista_tk:
                                 if token.get('Valor') == cadena:
                                     newToken = {'Nombre': token.get('Nombre'), 'Valor': token.get('Valor'),
                                                 'Descripcion': token.get('Descripcion'), 'Linea': num_linea,
                                                 'Columna': startComent}
-                                    print(newToken)
+                                    #print(newToken)
                                     lexemas.append(newToken)
                                     cadena = ''
                                     estado = 0
@@ -219,7 +226,7 @@ def manejoAFD():
                                 newToken = {'Nombre': 'tk_Identificador', 'Valor': cadena,
                                             'Descripcion': 'Palabra que funciona como identificador', 'Linea': num_linea,
                                             'Columna': startComent}
-                                print(newToken)
+                                #print(newToken)
                                 lexemas.append(newToken)
                                 cadena = ''
                                 estado = 0
@@ -234,7 +241,7 @@ def manejoAFD():
                     newToken = {'Nombre': 'tk_Cadena', 'Valor': cadena,
                                 'Descripcion': 'Cadena de caracteres', 'Linea': num_linea,
                                 'Columna': startComent}
-                    print(newToken)
+                    #print(newToken)
                     lexemas.append(newToken)
                     cadena = ''
                     estado = 0
@@ -249,7 +256,7 @@ def manejoAFD():
                     estado = 5
                     try:
                         if linea[i+1].isdigit() == False:
-                            print("no es valido", num_linea)
+                            #print("no es valido", num_linea)
                             newError = {'Error': cadena, 'Linea': num_linea, 'Columna': columna}
                             errores.append(newError)
                             estado = 0
@@ -284,7 +291,7 @@ def manejoAFD():
                         newToken = {'Nombre': 'tk_Numero', 'Valor': cadena,
                                     'Descripcion': 'Valor numerico', 'Linea': num_linea,
                                     'Columna': startComent}
-                        print(newToken)
+                        #print(newToken)
                         lexemas.append(newToken)
                         estado = 0
                         cadena = ''
@@ -300,7 +307,7 @@ def manejoAFD():
                         newToken = {'Nombre': 'tk_Numero', 'Valor': cadena,
                                     'Descripcion': 'Valor numerico', 'Linea': num_linea,
                                     'Columna': startComent}
-                        print(newToken)
+                        #print(newToken)
                         lexemas.append(newToken)
                         estado = 0
                         cadena = ''
@@ -313,30 +320,149 @@ def manejoAFD():
     repo.crearHtml(lexemas, "Tokens_Validos")
     repo.crearHtml(errores, "Errores_Encontrados")
     Memomry.lexemas = lexemas
-    print(Memomry.lexemas)
+    #print(Memomry.lexemas)
+
 
 def AP():
     print("///////////////////////// AP /////////////////////////////////")
-    manejoAFD()
+    listToken = Memomry.lexemas
+    tranciociones = Memomry.transitions
+    terminales = Memomry.terminales
+    noTerminales = Memomry.noTerminales
     pila = Pila()
-    if pila.isEmpty():
-        pila.push("#")
-    for transition in Memomry.transitions:
-        if transition["last"]["insertoPila"] == "S":
-            pila.push(transition["last"]["insertoPila"])
+    estado = 0
 
-    for i in range(len(Memomry.lexemas)):
-        if pila.obtenerUltimoAgregado() in Memomry.noTerminales:
+    if estado == 0:
+        for trancicion in tranciociones:
+            if trancicion["first"]["estado"] == 0:
+                mostrarTrancicion(pila, trancicion["string"])
+                pila.push(trancicion["last"]["insertoPila"])
+                estado = trancicion["last"]["estadoFinal"]
+    if estado == 1:
+        for trancicion in tranciociones:
+            if trancicion["first"]["estado"] == 1:
+                mostrarTrancicion(pila, trancicion["string"])
+                pila.push(trancicion["last"]["insertoPila"])
+                #mostrarTrancicion(pila, trancicion["string"])
+
+    condi = True
+
+    while condi:
+        if len(listToken) == 0:
+
+            if pila.obtenerUltimoAgregado() == "#":
+                print(f"{pila.getItems()} ----Entrada valida----")
+            elif pila.obtenerUltimoAgregado() == "S":
+                quitNT(pila, pila.obtenerUltimoAgregado(), "epsilon")
+                continue
+            else:
+                print("----Entrada invalida")
+            break
+
+        temp = pila.obtenerUltimoAgregado()
+        print("temp", temp)
+        if temp in noTerminales:
+            quitNT(pila, temp, listToken[0])
+        elif temp == listToken[0]["Nombre"]:
+            quitTerminal(pila, listToken)
+
+        # for q in tranciociones:
+        #     if temp == q["first"]["cimaPila"]:
+        #         if temp in noTerminales:
+        #             quitNT(pila, temp, listToken[0])
+        #             break
+        #         elif temp == listToken[0]["Nombre"]:
+        #             quitTerminal(pila, listToken)
+        #             break
+
+
+def quitTerminal(pila, listTk):
+    for tr in Memomry.transitions:
+        if tr["first"]["entrada"] == tr["first"]["cimaPila"] == listTk[0]["Nombre"]:
+            mostrarTrancicion(pila, tr["string"])
             pila.pop()
-            print(Memomry.lexemas[i]["Nombre"])
-            if Memomry.lexemas[i]["Nombre"] == "tk_var" or "tk_let" or "tk_const":
-                print(len(Memomry.lexemas))
-                print(Memomry.lexemas[i+3]["Nombre"])
-                pila.push("declaracionVariable")
-                print(pila.getItems())
+            del listTk[0]
+            print(pila.getItems())
+            input()
+            break
+
+def quitNT(pila, noTerminal, entrada):
+    for q in Memomry.transitions:
+        if q["first"]["cimaPila"] == noTerminal:
+            if noTerminal == "S":
+                if entrada != "epsilon":
+                    if entrada["Nombre"] == "tk_let" or entrada["Nombre"] == "tk_var" or entrada["Nombre"] == "tk_const":
+                        if type(q["last"]["insertoPila"]) == list: #puedo colocar else para la declaracion de funcion
+                            if q["last"]["insertoPila"][0] == "declaracionVariable":
+                                mostrarTrancicion(pila, q["string"])
+                                pila.pop()
+                                pila.extend(q["last"]["insertoPila"])
+                                pila.getItems()
+                                pr = input()
+                                break
+                    elif entrada["Nombre"] == "tk_if":
+                        if type(q["last"]["insertoPila"]) == list:
+                            if q["last"]["insertoPila"][0] == "SENTENCIA_IF":
+                                mostrarTrancicion(pila, q["string"])
+                                pila.pop()
+                                pila.extend(q["last"]["insertoPila"])
+                                pila.getItems()
+                                pr = input()
+                                break
+                else:
+                    if q["last"]["insertoPila"] == entrada:
+                        print("entro al else")
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        input()
+                        break
+            elif noTerminal == "declaracionVariable":
+                if q["first"]["cimaPila"] == noTerminal:
+                    mostrarTrancicion(pila, q["string"])
+                    pila.pop()
+                    pila.extend(q["last"]["insertoPila"])
+                    print(pila.getItems())
+                    input()
+                    break
+            elif noTerminal == "tipoVariable":
+                if q["last"]["insertoPila"] == entrada["Nombre"]:
+                    mostrarTrancicion(pila, q["string"])
+                    pila.pop()
+                    pila.push(q["last"]["insertoPila"])
+                    print(pila.getItems())
+                    input()
+                    break
+            elif noTerminal == "valor":
+                if q["last"]["insertoPila"] == entrada["Nombre"]:
+                    mostrarTrancicion(pila, q["string"])
+                    pila.pop()
+                    pila.push(q["last"]["insertoPila"])
+                    print(pila.getItems())
+                    input()
+                    break
+            elif noTerminal == "SENTENCIA_IF":
+                if q["first"]["cimaPila"] == noTerminal:
+                    mostrarTrancicion(pila, q["string"])
+                    pila.pop()
+                    pila.extend(q["last"]["insertoPila"])
+                    print(pila.getItems())
+                    input()
+                    break
+
+def cambioNT(pila, cadenaTrans, cont):
+    mostrarTrancicion(pila, cadenaTrans)
+    pila.pop()
+    pila.extend(cont)
+    print(pila.getItems())
+    input()
+
+def mostrarTrancicion(pila, trancicion):
+    print(f"{pila.getItems()} ----- {trancicion}")
+
 
 
 def diagrama():
+    print("CREANDO DIAGRAMA...\n")
     padres = Pila()
     contId = 0
     nodos = []
@@ -462,7 +588,7 @@ def diagrama():
         elif temp[i]["Nombre"] == "tk_LlaveC":
             nivel = nivel - 1
             if switchOn:
-                print("nivel en switch: ", nivel)
+                #print("nivel en switch: ", nivel)
                 nivel = saveNivSwitch
                 switchOn = False
 
@@ -539,7 +665,7 @@ def diagrama():
             nodo["Clave"] = str(contId)
             nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
             nodos.append(nodo)
-            print("nivel case", nivel)
+            #print("nivel case", nivel)
             contCase += 1
         elif temp[i]["Nombre"] == "tk_Default":
             nivel += 1
@@ -567,7 +693,7 @@ def diagrama():
         with dot.subgraph() as niv:
             niv.attr(rank='same')
             niv.node(temp[i]["Clave"], temp[i]["Contenido"])
-            print("nivel", temp[i]["Nivel"])
+            #print("nivel", temp[i]["Nivel"])
             if i >= 0 and i <= len(temp) - 2:
                 niv.edge(str(temp[i]["Clave"]), str(temp[i+1]["Clave"]))
 
@@ -582,9 +708,9 @@ def diagrama():
                         niv2.edge(nodos[i]["Padre"], nodos[i]["Clave"])
                     except:
                         v = 0
-                    print("nivel", nodos[i]["Nivel"])
+                    #print("nivel", nodos[i]["Nivel"])
 
-    print(dot.source)
+    #print(dot.source)
     dot.render("Reportes/Prueba", view=True)
 
     # with dot.subgraph() as s:
@@ -605,7 +731,6 @@ def diagrama():
 def sumNivel(num, list):
     if num not in list:
         list.append(num)
-
 
 
 if __name__ == '__main__':

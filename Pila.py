@@ -25,3 +25,8 @@ class Pila():
 
     def getItems(self):
         return self.pila
+
+    def extend(self, parametro):
+        aux =parametro[::-1]
+        for i in aux:
+            self.pila.append(i)

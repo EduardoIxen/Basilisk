@@ -114,7 +114,7 @@ class Memomry:
             },
             "last": {
                 "estadoFinal": 2,
-                "insertoPila": "declaracionVariable"
+                "insertoPila": ["declaracionVariable", "S"]
             },
 
             "string": "2,epsilon,S;2,declaracionVariable"
@@ -127,10 +127,10 @@ class Memomry:
             },
             "last": {
                 "estadoFinal": 2,
-                "insertoPila": "if"
+                "insertoPila": ["SENTENCIA_IF", "S"]
             },
 
-            "string": "2,epsilon,S;2,if"
+            "string": "2,epsilon,S;2, SENTENCIA_IF"
         },
         {
             "first": {
@@ -201,6 +201,19 @@ class Memomry:
             "first": {
                 "estado": 2,
                 "entrada": "epsilon",
+                "cimaPila": "S"
+            },
+            "last": {
+                "estadoFinal": 2,
+                "insertoPila": "epsilon"
+            },
+
+            "string": "2,epsilon,S;2,epsilon"
+        },
+        {
+            "first": {
+                "estado": 2,
+                "entrada": "epsilon",
                 "cimaPila": "declaracionVariable"
             },
             "last": {
@@ -208,7 +221,7 @@ class Memomry:
                 "insertoPila": ["tipoVariable", "tk_Identificador", "tk_Igual", "valor", "tk_PuntoYComa"]
             },
 
-            "string": "2,epsilon,declaracionVariable;2,tipoVariable tk_Identificador tk_Igual valor tk_PuntoYComa"
+            "string": "2,epsilon,declaracionVariable;  [2,tipoVariable tk_Identificador tk_Igual valor tk_PuntoYComa]"
         },
         {
             "first": {
@@ -443,7 +456,21 @@ class Memomry:
             },
 
             "string": "2,tk_Cadena,tk_Cadena;2,epsilon"
+        },
+        {
+            "first": {
+                "estado": 2,
+                "entrada": "epsilon",
+                "cimaPila": "SENTENCIA_IF"
+            },
+            "last": {
+                "estadoFinal": 2,
+                "insertoPila": ["tk_if", "tk_ParentesisA", "CONDICION", "tk_ParentesisC", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
+            },
+
+            "string": "2,epsilon, SENTENCIA_IF;2, [tk_if, tk_ParentesisA, CONDICION, tk_ParentesisC, tk_LlaveA, CONTENIDO, tk_LlaveC]"
         }
     ]
 
-    noTerminales = ["S","declaracionVariable", "tipoVariable", "valor", "booleano"]
+    noTerminales = ["S", "declaracionVariable", "tipoVariable", "valor", "booleano", "SENTENCIA_IF"]
+    terminales = ["tk_Identificador", "tk_Igual", "tk_PuntoYComa", "tk_true", "tk_false", "tk_Cadena", "tk_Numero"]

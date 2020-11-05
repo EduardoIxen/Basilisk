@@ -1,44 +1,48 @@
-S => declaracionVariables, S
-    |sentencia_if, S
-    |sentencia_while, S
-    |sentencia_foreach, S
-    |sentencia_switch, S
-    |def_funciones, S
-    |llamada_funciones, S
+S => DECLARACION_VARIABLE, S
+    |SENTENCIA_IF, S
+    |SENTENCIA_WHILE, S
+    |SENTENCIA_FOREACH, S
+    |SENTENCIA_SWITCH, S
+    |DEF_FUNCIONES, S
+    |LLAMADA_FUNCION, S
+    |epsilon
 
-contenido => declaracionVariables, contenido
-            |sentencia_if, contenido
-            |sentencia_while, contenido
-            |sentencia_foreach, contenido
-            |sentencia_switch, contenido
-            |def_funciones, contenido
-            |llamada_funciones, contenido
+CONTENIDO => DECLARACION_VARIABLE, CONTENIDO
+            |SENTENCIA_IF, CONTENIDO
+            |SENTENCIA_WHILE, CONTENIDO
+            |SENTENCIA_FOREACH, CONTENIDO
+            |SENTENCIA_SWITCH, CONTENIDO
+            |DEF_FUNCIONES, CONTENIDO
+            |LLAMADA_FUNCION, CONTENIDO
+            |epsilon
 
-declaracionVariables => tipoVariable, indentificador, token_= , valor , token_;
+DECLARACION_VARIABLE => TIPO_VARIABLE, indentificador, token_= , VALOR , token_;
 
-tipoVariable => let
+TIPO_VARIABLE => let
                 |var
                 |const
 
-valor => numero
+VALOR => numero
         | cadena
-        | booleano
+        | BOOLEANO
 
-booleano => true
+BOOLEANO => true
             |false
 
+CONDICION => BOOLEANO
+            | identificador
 
-sentencia_if => token_if, tk_(, booleano | identificador , tk_), tk_{, contenido, tk_}
+SENTENCIA_IF => token_if, tk_(, CONDICION , tk_), tk_{, CONTENIDO, tk_}
 
-sentencia_while => token_while, tk_(, booleano | identificador , tk_), tk_{, contenido, tk_}
+SENTENCIA_WHILE => token_while, tk_(, booleano | identificador , tk_), tk_{, contenido, tk_}
 
-sentencia_foreach => tk_foreach, identificador, tk_in, identificador, tk_), tk_{, contenido, tk_}
+SENTENCIA_FOREACH => tk_foreach, identificador, tk_in, identificador, tk_), tk_{, contenido, tk_}
 
-sentencia_switch => tk_switch, tk_(, identificador, tk_), tk_{, cases , tk_}
+SENTENCIA_SWITCH => tk_switch, tk_(, identificador, tk_), tk_{, cases , tk_}
 
-cases => case, cases
-        |default
-        |vacio
+CASES => case, cases
+        |DEFAULT
+        |epsilon
 
 case => tk_case, valor, tk_:, contenido, posible_break
 
