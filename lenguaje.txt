@@ -3,7 +3,7 @@ S => DECLARACION_VARIABLE, S
     |SENTENCIA_WHILE, S
     |SENTENCIA_FOREACH, S
     |SENTENCIA_SWITCH, S
-    |DEF_FUNCIONES, S
+    |DEF_FUNCION, S
     |LLAMADA_FUNCION, S
     |epsilon
 
@@ -12,15 +12,13 @@ CONTENIDO => DECLARACION_VARIABLE, CONTENIDO
             |SENTENCIA_WHILE, CONTENIDO
             |SENTENCIA_FOREACH, CONTENIDO
             |SENTENCIA_SWITCH, CONTENIDO
-            |DEF_FUNCIONES, CONTENIDO
+            |DEF_FUNCION, CONTENIDO
             |LLAMADA_FUNCION, CONTENIDO
             |epsilon
 
-DECLARACION_VARIABLE => TIPO_VARIABLE, indentificador, token_= , VALOR , token_;
-
-TIPO_VARIABLE => let
-                |var
-                |const
+TIPO_VARIABLE => tk_let
+                |tk_var
+                |tk_const
 
 VALOR => numero
         | cadena
@@ -32,37 +30,45 @@ BOOLEANO => true
 CONDICION => BOOLEANO
             | identificador
 
-SENTENCIA_IF => token_if, tk_(, CONDICION , tk_), tk_{, CONTENIDO, tk_}
+DECLARACION_VARIABLE => TIPO_VARIABLE, tk_Indentificador, tk_Igual , VALOR , token_;
 
-SENTENCIA_WHILE => token_while, tk_(, booleano | identificador , tk_), tk_{, contenido, tk_}
+SENTENCIA_IF => tk_if, tk_(, CONDICION , tk_), tk_{, CONTENIDO, tk_}
 
-SENTENCIA_FOREACH => tk_foreach, identificador, tk_in, identificador, tk_), tk_{, contenido, tk_}
+SENTENCIA_WHILE => tk_while, tk_(, CONDICION , tk_), tk_{, CONTENIDO, tk_}
 
-SENTENCIA_SWITCH => tk_switch, tk_(, identificador, tk_), tk_{, cases , tk_}
+SENTENCIA_FOREACH => tk_foreach, tk_( identificador, tk_in, identificador, tk_), tk_{, CONTENIDO, tk_}
 
-CASES => case, cases
+SENTENCIA_SWITCH => tk_switch, tk_(, identificador, tk_), tk_{, CASES , tk_}
+
+CASES => CASE, CASES
         |DEFAULT
         |epsilon
 
-case => tk_case, valor, tk_:, contenido, posible_break
+CASE => tk_case, VALOR, tk_:, CONTENIDO, POSIBLE_BREAK
 
-default => tk_default, tk_:, contenido, posible_break
+DEFAULT => tk_default, tk_:, CONTENIDO, POSIBLE_BREAK
 
-posible_break => tk_break, tk_;
-                | vacio
+POSIBLE_BREAK => tk_break, tk_;
+                | epsilon
 
-def_funciones => tipoVariable, identificador, tk_=, tk_(, parametros, tk_), tk_=>, tk_{, contenido, tk_}
+DEF_FUNCION => TIPO_VARIABLE, identificador, tk_=, tk_(, PARAMETROS, tk_), tk_=>, tk_{, CONTENIDO, tk_}
 
-parametros => parametro, parametros
-            | vacio
+PARAMETROS => [PARAMETRO, PARAMETROS]
+            | epsilon
 
-parametro => identificador, tk_,
+PARAMETRO => [identificador, tk_,]
             |identificador
 
-llamada_funcion => identificador, tk_(, parametros2, tk_), tk_;
+LLAMADA_FUNCION => [identificador, tk_(, PARAMETROS2, tk_), tk_;]
 
-parametros2 => valor2, parametros2
-            |vacio
+PARAMETROS2 => [VALOR, PARAMETROS2]
+            | [tk_, PARAMETROS2]
+            | [tk_Identificador, PARAMETROS2]
+            |epsilon
+
+
+
+
 
 valor2 => numero
         |cadena

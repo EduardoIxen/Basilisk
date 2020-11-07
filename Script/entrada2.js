@@ -1,5 +1,4 @@
 /*Entrada 2*/
-/*Este es un comentario y no puede ser tomado por el automata de pila solo por el afd*/
 /*Puede ser
 multilinea el comentario*/
 const _identificador1 = true;
@@ -9,6 +8,10 @@ const _three_3_33 = 3;
 const _four_4_44 = 3.53232;
 if(id){
 	/*Contenido del if*/
+	print();
+	foreach(cad in elementos){
+        let _variable1 = 0;
+	}
 }
 if(true){
 	let variable = 2;
@@ -16,6 +19,7 @@ if(true){
 if(false){
 	while(id){
 		/*Contenido del while*/
+		print("hola mundo");
 	}
 }
 while(identidicador){
@@ -24,7 +28,11 @@ while(identidicador){
 	}
 }
 while(true){
-	
+	const funcion = (p1, p2) => {
+	    if(true){
+	        let _var = "cadena";
+	    }
+	}
 }
 foreach(elemento in coleccion){
 	if(id){
@@ -36,20 +44,22 @@ foreach(elemento in coleccion){
 switch(identidicador) {
 	case 1:
 		let vasSwitch = 2;
-	break;
+	    break;
 	case true:
 		const vasSwitch2 = "Hola sw!";
-	break;
+	    break;
 	case "PruebaCaseCadena":
 		let _idSW = true;
-	break;
+		if (identidicador){
+		    let variable2 = true;
+		}
 	case 2:
 		if(id){
 			const _aceptado = true;
 		}
 	default:
 		var def1 = "Hola def";
-	break;
+	    break;
 }
 switch(id){
 	case 1:
@@ -60,30 +70,30 @@ switch(id){
 }
 const @ funcion1 = (parametro1) => {
 	if (id) {
-		let _nombre = "Eduardo";
+		let _nombre = "primeraParte";
 	}
 }
 let funcion2 = (parametro1, parametro2) => {
 	if (id) {
-		let _nombre = "Tomas";
+		let _nombre = "SegundaParte";
 	}
 }
 var funcion3 = (parametro1, parametro2, parametro3) => {
 	if (id) {
-		let _apellido = "Ixen";
+		let _apellido = "TerceraParte";
 	}
 }
 var funcion4 = () => {
 	if (id) {
-		let _apellido = "Rucuch";
+		let _apellido = "CuartaParte";
 	}
 }
-funcion1(true, 12, "Tomas");
-funcion2(false, 22, "Rucuch");
-funcion3("Eduardo", "Tomas", "Ixen", "Rucuch");
+funcion1(true, 12, "Primera");
+funcion2(false, 22, "segunda");
+funcion3("Primera", "Segunda", "Tercera", "Cuarta");
 funcion4(12, -3, +21, false);
 
 let prueba = 12;
 let prueba2 = 13.2;
-let prueba3 = 12.;
+let prueba3 = 12.5;
 

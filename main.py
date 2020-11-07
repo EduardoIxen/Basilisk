@@ -348,32 +348,29 @@ def AP():
     condi = True
 
     while condi:
+        if len(listToken) > 0:
+            if listToken[0]["Nombre"] == "tk_Comentario":
+                del listToken[0]
+
         if len(listToken) == 0:
 
             if pila.obtenerUltimoAgregado() == "#":
                 print(f"{pila.getItems()} ----Entrada valida----")
             elif pila.obtenerUltimoAgregado() == "S":
-                quitNT(pila, pila.obtenerUltimoAgregado(), "epsilon")
+                quitNT(pila, pila.obtenerUltimoAgregado(), "epsilon", listToken)
                 continue
             else:
                 print("----Entrada invalida")
+                condi = False
             break
 
         temp = pila.obtenerUltimoAgregado()
-        print("temp", temp)
+        print("temp", temp) #aca se imprime el ultimo agregado
+        print("tk", listToken[0]["Nombre"]) #imprime el token que se evalua
         if temp in noTerminales:
-            quitNT(pila, temp, listToken[0])
+            quitNT(pila, temp, listToken[0], listToken)
         elif temp == listToken[0]["Nombre"]:
             quitTerminal(pila, listToken)
-
-        # for q in tranciociones:
-        #     if temp == q["first"]["cimaPila"]:
-        #         if temp in noTerminales:
-        #             quitNT(pila, temp, listToken[0])
-        #             break
-        #         elif temp == listToken[0]["Nombre"]:
-        #             quitTerminal(pila, listToken)
-        #             break
 
 
 def quitTerminal(pila, listTk):
@@ -382,33 +379,55 @@ def quitTerminal(pila, listTk):
             mostrarTrancicion(pila, tr["string"])
             pila.pop()
             del listTk[0]
-            print(pila.getItems())
+            #print(pila.getItems()) imprime el estado de la pila despues de una trancicion
             input()
             break
 
-def quitNT(pila, noTerminal, entrada):
+def quitNT(pila, noTerminal, entrada, listaToknes):
     for q in Memomry.transitions:
         if q["first"]["cimaPila"] == noTerminal:
             if noTerminal == "S":
                 if entrada != "epsilon":
                     if entrada["Nombre"] == "tk_let" or entrada["Nombre"] == "tk_var" or entrada["Nombre"] == "tk_const":
-                        if type(q["last"]["insertoPila"]) == list: #puedo colocar else para la declaracion de funcion
-                            if q["last"]["insertoPila"][0] == "declaracionVariable":
-                                mostrarTrancicion(pila, q["string"])
-                                pila.pop()
-                                pila.extend(q["last"]["insertoPila"])
-                                pila.getItems()
-                                pr = input()
+                        if listaToknes[3]["Nombre"] != "tk_ParentesisA":
+                            if type(q["last"]["insertoPila"]) == list: #puedo colocar else para la declaracion de funcion
+                                if q["last"]["insertoPila"][0] == "DECLARACION_VARIABLE":
+                                    mostrarTrancicion(pila, q["string"])
+                                    pila.pop()
+                                    pila.extend(q["last"]["insertoPila"])
+                                    pila.getItems()
+                                    input()
+                                    break
+                        else:
+                            if q["last"]["insertoPila"][0] == "DEF_FUNCION":
+                                cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
                                 break
                     elif entrada["Nombre"] == "tk_if":
                         if type(q["last"]["insertoPila"]) == list:
-                            if q["last"]["insertoPila"][0] == "SENTENCIA_IF":
+                            if q["last"]["insertoPila"][0] == "SENTENCIA_IF" and q["first"]["cimaPila"] == "S":
                                 mostrarTrancicion(pila, q["string"])
                                 pila.pop()
                                 pila.extend(q["last"]["insertoPila"])
                                 pila.getItems()
-                                pr = input()
+                                input()
                                 break
+                    elif entrada["Nombre"] == "tk_while":
+                        if q["last"]["insertoPila"][0] == "SENTENCIA_WHILE" and q["first"]["cimaPila"] == "S":
+                            cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                            break
+                    elif entrada["Nombre"] == "tk_foreach":
+                        if q["last"]["insertoPila"][0] == "SENTENCIA_FOREACH" and q["first"]["cimaPila"] == "S":
+                            cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                            break
+                    elif entrada["Nombre"] == "tk_Switch":
+                        if q["last"]["insertoPila"][0] == "SENTENCIA_SWITCH" and q["first"]["cimaPila"] == "S":
+                            cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                            break
+                    elif entrada["Nombre"] == "tk_Identificador" and listaToknes[1]["Nombre"] == "tk_ParentesisA":
+                        if q["last"]["insertoPila"][0] == "LLAMADA_FUNCION" and q["first"]["cimaPila"] == "S":
+                            cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                            break
+
                 else:
                     if q["last"]["insertoPila"] == entrada:
                         print("entro al else")
@@ -416,45 +435,206 @@ def quitNT(pila, noTerminal, entrada):
                         pila.pop()
                         input()
                         break
-            elif noTerminal == "declaracionVariable":
+            elif noTerminal == "DECLARACION_VARIABLE":
                 if q["first"]["cimaPila"] == noTerminal:
                     mostrarTrancicion(pila, q["string"])
                     pila.pop()
                     pila.extend(q["last"]["insertoPila"])
-                    print(pila.getItems())
+                    #print(pila.getItems()) imprime el estado de la pila despues de una trancicion
                     input()
                     break
-            elif noTerminal == "tipoVariable":
+            elif noTerminal == "TIPO_VARIABLE":
                 if q["last"]["insertoPila"] == entrada["Nombre"]:
                     mostrarTrancicion(pila, q["string"])
                     pila.pop()
                     pila.push(q["last"]["insertoPila"])
-                    print(pila.getItems())
+                    #print(pila.getItems()) imprime el estadod e la pila despues de una trancicion
                     input()
                     break
-            elif noTerminal == "valor":
-                if q["last"]["insertoPila"] == entrada["Nombre"]:
-                    mostrarTrancicion(pila, q["string"])
-                    pila.pop()
-                    pila.push(q["last"]["insertoPila"])
-                    print(pila.getItems())
-                    input()
-                    break
+            elif noTerminal == "VALOR":
+                if entrada["Nombre"] != "tk_true" and entrada["Nombre"] != "tk_false":
+                    if q["last"]["insertoPila"] == entrada["Nombre"]:
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        pila.push(q["last"]["insertoPila"])
+                        #print(pila.getItems()) estado de la pila
+                        input()
+                        break
+                else:
+                    if q["last"]["insertoPila"] == "BOOLEANO":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "P" )
+                        break
+
             elif noTerminal == "SENTENCIA_IF":
                 if q["first"]["cimaPila"] == noTerminal:
-                    mostrarTrancicion(pila, q["string"])
-                    pila.pop()
-                    pila.extend(q["last"]["insertoPila"])
-                    print(pila.getItems())
-                    input()
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "BOOLEANO":
+                if q["last"]["insertoPila"] == entrada["Nombre"]:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "P")
+                    break
+            elif noTerminal == "CONDICION":
+                if entrada["Nombre"] == "tk_Identificador":
+                    if q["last"]["insertoPila"] == entrada["Nombre"]:
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "P")
+                        break
+                else:
+                    if q["first"]["cimaPila"] == noTerminal and q["last"]["insertoPila"] == "BOOLEANO":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "P")
+                        break
+            elif noTerminal == "CONTENIDO":
+                if entrada["Nombre"] == "tk_LlaveC" or entrada["Nombre"] == "tk_Break" or entrada["Nombre"] == "tk_Case" or entrada["Nombre"] == "tk_Default":
+                    if q["first"]["cimaPila"] == "CONTENIDO" and q["last"]["insertoPila"] == "epsilon":
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        #print(pila.getItems()) estado de la pila
+                        input()
+                        break
+                if entrada["Nombre"] == "tk_let" or entrada["Nombre"] == "tk_var" or entrada["Nombre"] == "tk_const":
+                    if listaToknes[3]["Nombre"] != "tk_ParentesisA":
+                        if type(q["last"]["insertoPila"]) == list:
+                            if q["last"]["insertoPila"][0] == "DECLARACION_VARIABLE":
+                                cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                                break
+                    else:
+                        if q["last"]["insertoPila"][0] == "DEF_FUNCION":
+                            cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                            break
+                elif entrada["Nombre"] == "tk_if":
+                    if q["first"]["cimaPila"] == "CONTENIDO" and q["last"]["insertoPila"][0] == "SENTENCIA_IF":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                elif entrada["Nombre"] == "tk_while":
+                    if q["last"]["insertoPila"][0] == "SENTENCIA_WHILE" and q["first"]["cimaPila"] == "CONTENIDO":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                elif entrada["Nombre"] == "tk_foreach":
+                    if q["last"]["insertoPila"][0] == "SENTENCIA_FOREACH" and q["first"]["cimaPila"] == "CONTENIDO":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                elif entrada["Nombre"] == "tk_Switch":
+                    if q["last"]["insertoPila"][0] == "SENTENCIA_SWITCH" and q["first"]["cimaPila"] == "CONTENIDO":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                elif entrada["Nombre"] == "tk_Identificador" and listaToknes[1]["Nombre"] == "tk_ParentesisA":
+                    if q["last"]["insertoPila"][0] == "LLAMADA_FUNCION" and q["first"]["cimaPila"] == "CONTENIDO":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+
+
+
+            elif noTerminal == "SENTENCIA_WHILE":
+                if q["first"]["cimaPila"] == noTerminal:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "SENTENCIA_FOREACH":
+                if q["first"]["cimaPila"] == noTerminal:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "SENTENCIA_SWITCH":
+                if q["first"]["cimaPila"] == noTerminal:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "CASES":
+                if entrada["Nombre"] == "tk_LlaveC":
+                    if q["first"]["cimaPila"] == "CASES" and q["last"]["insertoPila"] == "epsilon":
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        input()
+                        break
+                elif entrada["Nombre"] == "tk_Case":
+                    if q["first"]["cimaPila"] == "CASES" and q["last"]["insertoPila"][0] == "CASE":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                elif entrada["Nombre"] == "tk_Default":
+                    if q["last"]["insertoPila"] == "DEFAULT":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "P")
+                        break
+            elif noTerminal == "CASE":
+                if q["first"]["cimaPila"] == "CASE":
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "DEF_FUNCION":
+                if q["first"]["cimaPila"] == noTerminal:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "PARAMETROS":
+                if entrada["Nombre"] != "tk_ParentesisC":
+                    if q["first"]["cimaPila"] == noTerminal:
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                else:
+                    if q["first"]["cimaPila"] == noTerminal and q["last"]["insertoPila"] == "epsilon":
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        #print(pila.getItems()) estado de la pila
+                        input()
+                        break
+            elif noTerminal == "PARAMETRO":
+                if listaToknes[1]["Nombre"] == "tk_ParentesisC":
+                    if q["first"]["cimaPila"] == noTerminal and q["last"]["insertoPila"] == "tk_Identificador":
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "P")
+                        break
+                if listaToknes[1]["Nombre"] == "tk_coma":
+                    if q["first"]["cimaPila"] == noTerminal and type(q["last"]["insertoPila"]) == list:
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+            elif noTerminal == "LLAMADA_FUNCION":
+                if q["first"]["cimaPila"] == noTerminal and type(q["last"]["insertoPila"]) == list:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                    break
+            elif noTerminal == "PARAMETROS2":
+                if entrada["Nombre"] == "tk_ParentesisC":
+                    if q["first"]["cimaPila"] == noTerminal and q["last"]["insertoPila"] == "epsilon":
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        input()
+                        break
+                else:
+                    if q["first"]["cimaPila"] == noTerminal and type(q["last"]["insertoPila"]) == list and entrada["Nombre"] != "tk_coma":
+                        if entrada["Nombre"] == "tk_Identificador":
+                            if q["last"]["insertoPila"][0] == "tk_Identificador":
+                                cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                                break
+                        else:
+                            if q["last"]["insertoPila"][0] == "VALOR":
+                                cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                                break
+                    else:
+                        if q["first"]["cimaPila"] == "PARAMETROS2" and q["last"]["insertoPila"][0] == "tk_coma":
+                            cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                            break
+            elif noTerminal == "POSIBLE_BREAK":
+                if entrada["Nombre"] == "tk_Break":
+                    if q["first"]["cimaPila"] == "POSIBLE_BREAK" and type(q["last"]["insertoPila"]) == list:
+                        cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
+                        break
+                else:
+                    if q["first"]["cimaPila"] == "POSIBLE_BREAK" and q["last"]["insertoPila"] == "epsilon":
+                        mostrarTrancicion(pila, q["string"])
+                        pila.pop()
+                        input()
+                        break
+            elif noTerminal == "DEFAULT":
+                if q["first"]["cimaPila"] == noTerminal:
+                    cambioNT(pila, q["string"], q["last"]["insertoPila"], "L")
                     break
 
-def cambioNT(pila, cadenaTrans, cont):
-    mostrarTrancicion(pila, cadenaTrans)
-    pila.pop()
-    pila.extend(cont)
-    print(pila.getItems())
-    input()
+
+
+def cambioNT(pila, cadenaTrans, cont, addListOrWord):
+    if addListOrWord == "L":
+        mostrarTrancicion(pila, cadenaTrans)
+        pila.pop()
+        pila.extend(cont)
+        #print(pila.getItems()) estado de la pila
+        input()
+    elif addListOrWord == "P":
+        mostrarTrancicion(pila, cadenaTrans)
+        pila.pop()
+        pila.push(cont)
+        #print(pila.getItems()) estado de la pila
+        input()
 
 def mostrarTrancicion(pila, trancicion):
     print(f"{pila.getItems()} ----- {trancicion}")

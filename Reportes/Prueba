@@ -2,6 +2,26 @@ digraph {
 	node [shape=box]
 	{
 		rank=same
-		1 [label="Asignacion: _variable1"]
+		1 [label="Sentencia switch"]
+	}
+	{
+		rank=2
+		2 [label="Condicion: id1"]
+		1 -> 2
+	}
+	{
+		rank=3
+		3 [label="Case 1"]
+		2 -> 3
+	}
+	{
+		rank=4
+		4 [label="Case \"entrada2\""]
+		3 -> 4
+	}
+	{
+		rank=5
+		5 [label="Case true"]
+		4 -> 5
 	}
 }
