@@ -608,7 +608,7 @@ class Memomry:
             },
             "last": {
                 "estadoFinal": 2,
-                "insertoPila": ["TIPO_VARIABLE", "tk_Identificador", "tk_Igual", "tk_ParentesisA", "PARAMETROS", "tk_ParentesisC", "tk_Flecha", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
+                "insertoPila": ["TIPO_VARIABLE", "tk_Identificador", "tk_Igual", "tk_ParentesisA", "PARAMETROS2", "tk_ParentesisC", "tk_Flecha", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
             },
 
             "string": "2,epsilon, DEF_FUNCION; 2, [TIPO_VARIABLE ,  tk_Identificador  ,  tk_Igual  ,  tk_ParentesisA  ,  PARAMETROS  ,  tk_ParentesisC  ,  tk_Flecha  ,  tk_LlaveA  , CONTENIDO , tk_LlaveC]"

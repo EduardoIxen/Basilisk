@@ -338,12 +338,14 @@ def AP():
                 mostrarTrancicion(pila, trancicion["string"])
                 pila.push(trancicion["last"]["insertoPila"])
                 estado = trancicion["last"]["estadoFinal"]
+                input()
     if estado == 1:
         for trancicion in tranciociones:
             if trancicion["first"]["estado"] == 1:
                 mostrarTrancicion(pila, trancicion["string"])
                 pila.push(trancicion["last"]["insertoPila"])
                 #mostrarTrancicion(pila, trancicion["string"])
+                input()
 
     condi = True
 
@@ -356,6 +358,7 @@ def AP():
 
             if pila.obtenerUltimoAgregado() == "#":
                 print(f"{pila.getItems()} ----Entrada valida----")
+                input()
             elif pila.obtenerUltimoAgregado() == "S":
                 quitNT(pila, pila.obtenerUltimoAgregado(), "epsilon", listToken)
                 continue
@@ -365,8 +368,8 @@ def AP():
             break
 
         temp = pila.obtenerUltimoAgregado()
-        print("temp", temp) #aca se imprime el ultimo agregado
-        print("tk", listToken[0]["Nombre"]) #imprime el token que se evalua
+        #print("temp", temp) aca se imprime el ultimo agregado
+        #print("tk", listToken[0]["Nombre"]) imprime el token que se evalua
         if temp in noTerminales:
             quitNT(pila, temp, listToken[0], listToken)
         elif temp == listToken[0]["Nombre"]:
@@ -430,7 +433,7 @@ def quitNT(pila, noTerminal, entrada, listaToknes):
 
                 else:
                     if q["last"]["insertoPila"] == entrada:
-                        print("entro al else")
+                        #print("entro al else")
                         mostrarTrancicion(pila, q["string"])
                         pila.pop()
                         input()

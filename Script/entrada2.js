@@ -78,7 +78,7 @@ let funcion2 = (parametro1, parametro2) => {
 		let _nombre = "SegundaParte";
 	}
 }
-var funcion3 = (parametro1, parametro2, parametro3) => {
+var funcion3 = (parametro1, "parametro2", parametro3) => {
 	if (id) {
 		let _apellido = "TerceraParte";
 	}
@@ -88,9 +88,14 @@ var funcion4 = () => {
 		let _apellido = "CuartaParte";
 	}
 }
+var funcion4 = (true, cadena, "cadena") => {
+	if (id) {
+		let _apellido = "CuartaParte";
+	}
+}
 funcion1(true, 12, "Primera");
 funcion2(false, 22, "segunda");
-funcion3("Primera", "Segunda", "Tercera", "Cuarta");
+funcion3("Primera", _identificador1, "Tercera", "Cuarta");
 funcion4(12, -3, +21, false);
 
 let prueba = 12;
