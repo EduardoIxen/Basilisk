@@ -30,3 +30,7 @@ class Pila():
         aux =parametro[::-1]
         for i in aux:
             self.pila.append(i)
+
+    def getPilaReporte(self):
+        aux = self.pila[::-1]
+        return aux

@@ -51,13 +51,7 @@ DEFAULT => tk_default, tk_:, CONTENIDO, POSIBLE_BREAK
 POSIBLE_BREAK => tk_break, tk_;
                 | epsilon
 
-DEF_FUNCION => TIPO_VARIABLE, identificador, tk_=, tk_(, PARAMETROS, tk_), tk_=>, tk_{, CONTENIDO, tk_}
-
-PARAMETROS => [PARAMETRO, PARAMETROS]
-            | epsilon
-
-PARAMETRO => [identificador, tk_,]
-            |identificador
+DEF_FUNCION => TIPO_VARIABLE, identificador, tk_=, tk_(, PARAMETROS2, tk_), tk_=>, tk_{, CONTENIDO, tk_}
 
 LLAMADA_FUNCION => [identificador, tk_(, PARAMETROS2, tk_), tk_;]
 
@@ -65,12 +59,3 @@ PARAMETROS2 => [VALOR, PARAMETROS2]
             | [tk_, PARAMETROS2]
             | [tk_Identificador, PARAMETROS2]
             |epsilon
-
-
-
-
-
-valor2 => numero
-        |cadena
-        | booleano
-        |,

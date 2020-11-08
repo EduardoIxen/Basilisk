@@ -2,6 +2,8 @@ class Memomry:
     createReport = False
     content_script = []
     lexemas = []
+    reporteEntrada = []
+    reporteAP = []
     lista_tk = [
         {
             'Nombre': 'tk_let',
@@ -91,7 +93,7 @@ class Memomry:
                 "insertoPila": "#"
             },
 
-            "string": "0,epsilon,epsilon;1,#"
+            "string": "0 , epsilon , epsilon ; 1 , #"
         },
         {
             "first": {
@@ -104,7 +106,7 @@ class Memomry:
                 "insertoPila": "S"
             },
 
-            "string": "1,epsilon,epsilon;2,S"
+            "string": "1 , epsilon , epsilon ; 2 , S"
         },
         {
             "first": {
@@ -117,7 +119,7 @@ class Memomry:
                 "insertoPila": ["DECLARACION_VARIABLE", "S"]
             },
 
-            "string": "2,epsilon,S;2, [DECLARACION_VARIABLE, S]"
+            "string": "2 , epsilon , S ; 2 ,  [DECLARACION_VARIABLE, S]"
         },
         {
             "first": {
@@ -130,7 +132,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_IF", "S"]
             },
 
-            "string": "2,epsilon,S;2, [SENTENCIA_IF, S]"
+            "string": "2 , epsilon , S ; 2 ,  [SENTENCIA_IF, S]"
         },
         {
             "first": {
@@ -143,7 +145,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_WHILE", "S"]
             },
 
-            "string": "2,epsilon,S;2, [SENTENCIA_WHILE, S]"
+            "string": "2 , epsilon , S ; 2 ,  [SENTENCIA_WHILE, S]"
         },
         {
             "first": {
@@ -156,7 +158,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_FOREACH", "S"]
             },
 
-            "string": "2,epsilon,S;2, [SENTENCIA_FOREACH, S]"
+            "string": "2 , epsilon , S ; 2 ,  [SENTENCIA_FOREACH, S]"
         },
         {
             "first": {
@@ -169,7 +171,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_SWITCH", "S"]
             },
 
-            "string": "2,epsilon,S;2, [SENTENCIA_SWITCH, S]"
+            "string": "2 , epsilon , S ; 2 ,  [SENTENCIA_SWITCH, S]"
         },
         {
             "first": {
@@ -182,7 +184,7 @@ class Memomry:
                 "insertoPila": ["DEF_FUNCION", "S"]
             },
 
-            "string": "2,epsilon,S;2, [DEF_FUNCION, S]"
+            "string": "2 , epsilon , S ; 2 ,  [DEF_FUNCION, S]"
         },
         {
             "first": {
@@ -195,7 +197,7 @@ class Memomry:
                 "insertoPila": ["LLAMADA_FUNCION", "S"]
             },
 
-            "string": "2,epsilon,S;2, [LLAMADA_FUNCION, S]"
+            "string": "2 , epsilon , S ; 2 ,  [LLAMADA_FUNCION ,  S]"
         },
         {
             "first": {
@@ -208,7 +210,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,epsilon,S;2,epsilon"
+            "string": "2 , epsilon , S ; 2 , epsilon"
         },
         {
             "first": {
@@ -221,7 +223,7 @@ class Memomry:
                 "insertoPila": ["DECLARACION_VARIABLE", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [DECLARACION_VARIABLE, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ; 2, [DECLARACION_VARIABLE,  CONTENIDO]"
         },
         {
             "first": {
@@ -234,7 +236,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_IF", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [SENTENCIA_IF, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ;  2 ,  [SENTENCIA_IF,  CONTENIDO]"
         },
         {
             "first": {
@@ -247,7 +249,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_WHILE", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [SENTENCIA_WHILE, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ; 2, [SENTENCIA_WHILE,  CONTENIDO]"
         },
         {
             "first": {
@@ -260,7 +262,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_FOREACH", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [SENTENCIA_FOREACH, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ; 2, [SENTENCIA_FOREACH,  CONTENIDO]"
         },
         {
             "first": {
@@ -273,7 +275,7 @@ class Memomry:
                 "insertoPila": ["SENTENCIA_SWITCH", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [SENTENCIA_SWITCH, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ; 2 , [SENTENCIA_SWITCH,  CONTENIDO]"
         },
         {
             "first": {
@@ -286,7 +288,7 @@ class Memomry:
                 "insertoPila": ["DEF_FUNCION", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [DEF_FUNCION, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ;  2 , [DEF_FUNCION, CONTENIDO]"
         },
         {
             "first": {
@@ -299,7 +301,7 @@ class Memomry:
                 "insertoPila": ["LLAMADA_FUNCION", "CONTENIDO"]
             },
 
-            "string": "2,epsilon,CONTENIDO; 2, [LLAMADA_FUNCION, CONTENIDO]"
+            "string": "2 , epsilon , CONTENIDO ; 2 , [LLAMADA_FUNCION, CONTENIDO]"
         },
         {
             "first": {
@@ -312,7 +314,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, epsilon, CONTENIDO; 2, epsilon"
+            "string": "2 , epsilon , CONTENIDO ; 2 , epsilon"
         },
         {
             "first": {
@@ -325,7 +327,7 @@ class Memomry:
                 "insertoPila": "tk_const"
             },
 
-            "string": "2,epsilon,TIPO_VARIABLE;2,tk_const"
+            "string": "2 , epsilon , TIPO_VARIABLE ; 2 , tk_const"
         },
         {
             "first": {
@@ -364,7 +366,7 @@ class Memomry:
                 "insertoPila": "tk_Numero"
             },
 
-            "string": "2, epsilon, VALOR; 2, tk_Numero"
+            "string": "2 , epsilon , VALOR ; 2 , tk_Numero"
         },
         {
             "first": {
@@ -377,7 +379,7 @@ class Memomry:
                 "insertoPila": "tk_Cadena"
             },
 
-            "string": "2, epsilon, VALOR; 2, tk_Cadena"
+            "string": "2 , epsilon , VALOR ; 2 , tk_Cadena"
         },
         {
             "first": {
@@ -390,7 +392,7 @@ class Memomry:
                 "insertoPila": "BOOLEANO"
             },
 
-            "string": "2, epsilon, valor; 2, BOOLEANO"
+            "string": "2 , epsilon , valor ; 2 , BOOLEANO"
         },
         {
             "first": {
@@ -403,7 +405,7 @@ class Memomry:
                 "insertoPila": "tk_true"
             },
 
-            "string": "2, epsilon, BOOLEANO; 2, tk_true"
+            "string": "2 , epsilon , BOOLEANO ; 2 , tk_true"
         },
         {
             "first": {
@@ -416,7 +418,7 @@ class Memomry:
                 "insertoPila": "tk_false"
             },
 
-            "string": "2, epsilon, BOOLEANO; 2, tk_false"
+            "string": "2 , epsilon , BOOLEANO ; 2 , tk_false"
         },
         {
             "first": {
@@ -429,7 +431,7 @@ class Memomry:
                 "insertoPila": "BOOLEANO"
             },
 
-            "string": "2, epsilon, CONDICION; 2, BOOLEANO"
+            "string": "2 , epsilon , CONDICION ; 2 , BOOLEANO"
         },
         {
             "first": {
@@ -442,7 +444,7 @@ class Memomry:
                 "insertoPila": "tk_Identificador"
             },
 
-            "string": "2, epsilon, CONDICION; 2, tk_Identificador"
+            "string": "2 , epsilon , CONDICION ; 2 , tk_Identificador"
         },
         {
             "first": {
@@ -455,7 +457,7 @@ class Memomry:
                 "insertoPila": ["TIPO_VARIABLE", "tk_Identificador", "tk_Igual", "VALOR", "tk_PuntoYComa"]
             },
 
-            "string": "2,epsilon,DECLARACION_VARIABLE;  [2, TIPO_VARIABLE, tk_Identificador, tk_Igual, VALOR, tk_PuntoYComa]"
+            "string": "2 , epsilon , DECLARACION_VARIABLE ;  [2 , TIPO_VARIABLE , tk_Identificador , tk_Igual , VALOR , tk_PuntoYComa]"
         },
         {
             "first": {
@@ -468,7 +470,7 @@ class Memomry:
                 "insertoPila": ["tk_if", "tk_ParentesisA", "CONDICION", "tk_ParentesisC", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
             },
 
-            "string": "2,epsilon, SENTENCIA_IF;2, [tk_if, tk_ParentesisA, CONDICION, tk_ParentesisC, tk_LlaveA, CONTENIDO, tk_LlaveC]"
+            "string": "2 , epsilon , SENTENCIA_IF ; 2 , [tk_if , tk_ParentesisA , CONDICION , tk_ParentesisC , tk_LlaveA , CONTENIDO , tk_LlaveC]"
         },
         {
             "first": {
@@ -481,7 +483,7 @@ class Memomry:
                 "insertoPila": ["tk_while", "tk_ParentesisA", "CONDICION", "tk_ParentesisC", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
             },
 
-            "string": "2,epsilon, SENTENCIA_WHILE;2, [tk_while,  tk_ParentesisA,  CONDICION  ,   tk_ParentesisC,   tk_LlaveA,  CONTENIDO  , tk_LlaveC]"
+            "string": "2 , epsilon , SENTENCIA_WHILE ; 2 , [tk_while ,  tk_ParentesisA ,  CONDICION  ,   tk_ParentesisC ,   tk_LlaveA ,  CONTENIDO  , tk_LlaveC]"
         },
         {
             "first": {
@@ -494,7 +496,7 @@ class Memomry:
                 "insertoPila": ["tk_foreach", "tk_ParentesisA", "tk_Identificador", "tk_in", "tk_Identificador", "tk_ParentesisC", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
             },
 
-            "string": "2,epsilon, SENTENCIA_FOREACH; 2, [tk_foreach,  tk_ParentesisA,  tk_Identificador  , tk_in,   tk_Identificador,   tk_ParentesisC,   tk_LlaveA,  CONTENIDO  , tk_LlaveC]"
+            "string": "2 , epsilon , SENTENCIA_FOREACH ; 2 , [tk_foreach ,  tk_ParentesisA ,  tk_Identificador  , tk_in ,   tk_Identificador ,   tk_ParentesisC ,   tk_LlaveA ,  CONTENIDO  , tk_LlaveC]"
         },
         {
             "first": {
@@ -507,7 +509,7 @@ class Memomry:
                 "insertoPila": ["tk_Switch", "tk_ParentesisA", "tk_Identificador", "tk_ParentesisC", "tk_LlaveA", "CASES", "tk_LlaveC"]
             },
 
-            "string": "2,epsilon, SENTENCIA_SWITCH; 2, [tk_foreach,  tk_ParentesisA,  tk_Identificador  , tk_in,   tk_Identificador,   tk_ParentesisC,   tk_LlaveA,  CONTENIDO  , tk_LlaveC]"
+            "string": "2 , epsilon , SENTENCIA_SWITCH ; 2 , [tk_foreach ,  tk_ParentesisA ,  tk_Identificador   , tk_in ,   tk_Identificador ,   tk_ParentesisC ,   tk_LlaveA ,  CONTENIDO  , tk_LlaveC]"
         },
         {
             "first": {
@@ -520,7 +522,7 @@ class Memomry:
                 "insertoPila": ["CASE", "CASES"]
             },
 
-            "string": "2,epsilon, CASES; 2, [CASE, CASES]"
+            "string": "2 , epsilon , CASES ; 2 , [CASE , CASES]"
         },
         {
             "first": {
@@ -533,7 +535,7 @@ class Memomry:
                 "insertoPila": "DEFAULT"
             },
 
-            "string": "2,epsilon, CASES; 2, DEFAULT"
+            "string": "2 , epsilon , CASES ; 2, DEFAULT"
         },
         {
             "first": {
@@ -546,7 +548,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,epsilon, CASES; 2, epsilon"
+            "string": "2, epsilon, CASES; 2, epsilon"
         },
         {
             "first": {
@@ -559,7 +561,7 @@ class Memomry:
                 "insertoPila": ["tk_Case", "VALOR", "tk_DosPuntos", "CONTENIDO", "POSIBLE_BREAK"]
             },
 
-            "string": "2,epsilon, CASE; 2, [tk_Case, VALOR, tk_DosPuntos, CONTENIDO , POSIBLE_BREAK]"
+            "string": "2 , epsilon , CASE ; 2 , [tk_Case , VALOR , tk_DosPuntos , CONTENIDO , POSIBLE_BREAK]"
         },
         {
             "first": {
@@ -572,7 +574,7 @@ class Memomry:
                 "insertoPila": ["tk_Default", "tk_DosPuntos", "CONTENIDO", "POSIBLE_BREAK"]
             },
 
-            "string": "2,epsilon, DEFAULT; 2, [tk_Default ,   tk_DosPuntos ,  CONTENIDO ,  POSIBLE_BREAK]"
+            "string": "2 , epsilon , DEFAULT ; 2 , [tk_Default ,   tk_DosPuntos ,  CONTENIDO ,  POSIBLE_BREAK]"
         },
         {
             "first": {
@@ -585,7 +587,7 @@ class Memomry:
                 "insertoPila": ["tk_Break", "tk_PuntoYComa"]
             },
 
-            "string": "2,epsilon, POSIBLE_BREAK; 2, [tk_Break , tk_PuntoYComa]"
+            "string": "2 , epsilon , POSIBLE_BREAK ; 2 , [tk_Break , tk_PuntoYComa]"
         },
         {
             "first": {
@@ -598,7 +600,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,epsilon, POSIBLE_BREAK; 2, epsilon"
+            "string": "2 , epsilon , POSIBLE_BREAK ; 2 , epsilon"
         },
         {
             "first": {
@@ -611,7 +613,7 @@ class Memomry:
                 "insertoPila": ["TIPO_VARIABLE", "tk_Identificador", "tk_Igual", "tk_ParentesisA", "PARAMETROS2", "tk_ParentesisC", "tk_Flecha", "tk_LlaveA", "CONTENIDO", "tk_LlaveC"]
             },
 
-            "string": "2,epsilon, DEF_FUNCION; 2, [TIPO_VARIABLE ,  tk_Identificador  ,  tk_Igual  ,  tk_ParentesisA  ,  PARAMETROS  ,  tk_ParentesisC  ,  tk_Flecha  ,  tk_LlaveA  , CONTENIDO , tk_LlaveC]"
+            "string": "2 , epsilon , DEF_FUNCION ; 2 , [TIPO_VARIABLE ,  tk_Identificador  ,  tk_Igual  ,  tk_ParentesisA  ,  PARAMETROS2  ,  tk_ParentesisC  ,  tk_Flecha  ,  tk_LlaveA  , CONTENIDO , tk_LlaveC]"
         },
         {
             "first": {
@@ -624,7 +626,7 @@ class Memomry:
                 "insertoPila": ["PARAMETRO", "PARAMETROS"]
             },
 
-            "string": "2,epsilon, PARAMETROS; 2, [PARAMETRO,  PARAMETROS]"
+            "string": "2 , epsilon , PARAMETROS ; 2, [PARAMETRO ,  PARAMETROS]"
         },
         {
             "first": {
@@ -637,7 +639,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,epsilon, PARAMETROS; 2, epsilon"
+            "string": "2 , epsilon , PARAMETROS ; 2 , epsilon"
         },
         {
             "first": {
@@ -650,7 +652,7 @@ class Memomry:
                 "insertoPila": ["tk_Identificador", "tk_coma"]
             },
 
-            "string": "2,epsilon, PARAMETRO; 2, [tk_Identificador,  tk_coma]"
+            "string": "2 , epsilon , PARAMETRO ; 2, [tk_Identificador ,  tk_coma]"
         },
         {
             "first": {
@@ -663,7 +665,7 @@ class Memomry:
                 "insertoPila": "tk_Identificador"
             },
 
-            "string": "2,epsilon, PARAMETRO; 2, tk_Identificador"
+            "string": "2 , epsilon , PARAMETRO ; 2 , tk_Identificador"
         },
         {
             "first": {
@@ -676,7 +678,7 @@ class Memomry:
                 "insertoPila": ["tk_Identificador", "tk_ParentesisA", "PARAMETROS2", "tk_ParentesisC", "tk_PuntoYComa"]
             },
 
-            "string": "2,epsilon, LLAMADA_FUNCION; 2, [tk_Identificador  , tk_ParentesisA,  PARAMETROS2,  tk_ParentesisC  , tk_PuntoYComa]"
+            "string": "2 , epsilon , LLAMADA_FUNCION ; 2 , [tk_Identificador  , tk_ParentesisA ,  PARAMETROS2 ,  tk_ParentesisC  , tk_PuntoYComa]"
         },
         {
             "first": {
@@ -689,7 +691,7 @@ class Memomry:
                 "insertoPila": ["VALOR", "PARAMETROS2"]
             },
 
-            "string": "2,epsilon, PARAMETROS2; 2, [VALOR, PARAMETROS2]"
+            "string": "2 , epsilon , PARAMETROS2 ; 2 , [VALOR , PARAMETROS2]"
         },
         {
             "first": {
@@ -702,7 +704,7 @@ class Memomry:
                 "insertoPila": ["tk_coma", "PARAMETROS2"]
             },
 
-            "string": "2,epsilon, PARAMETROS2; 2, [tk_coma, PARAMETROS2]"
+            "string": "2 , epsilon , PARAMETROS2 ; 2 , [tk_coma , PARAMETROS2]"
         },
         {
             "first": {
@@ -715,7 +717,7 @@ class Memomry:
                 "insertoPila": ["tk_Identificador", "PARAMETROS2"]
             },
 
-            "string": "2,epsilon, PARAMETROS2; 2, [tk_Identificador, PARAMETROS2]"
+            "string": "2 , epsilon , PARAMETROS2 ; 2 , [tk_Identificador , PARAMETROS2]"
         },
         {
             "first": {
@@ -728,7 +730,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,epsilon, PARAMETROS2; 2, epsilon"
+            "string": "2 , epsilon , PARAMETROS2 ; 2 , epsilon"
         },
         {
             "first": {
@@ -741,7 +743,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_const,tk_const;2,epsilon"
+            "string": "2 , tk_const , tk_const ; 2 , epsilon"
         },
         {
             "first": {
@@ -754,7 +756,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_var,tk_var;2,epsilon"
+            "string": "2 , tk_var , tk_var ; 2 , epsilon"
         },
         {
             "first": {
@@ -767,7 +769,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_let,tk_let;2,epsilon"
+            "string": " 2 , tk_let , tk_let ; 2 , epsilon"
         },
         {
             "first": {
@@ -780,7 +782,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_Identificador,tk_Identificador;2,epsilon"
+            "string": "2 , tk_Identificador ,tk_Identificador ; 2 , epsilon"
         },
         {
             "first": {
@@ -793,7 +795,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_Igual,tk_Igual;2,epsilon"
+            "string": "2 , tk_Igual , tk_Igual ; 2 , epsilon"
         },
         {
             "first": {
@@ -806,7 +808,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_PuntoYComa,tk_PuntoYComa;2,epsilon"
+            "string": "2 , tk_PuntoYComa , tk_PuntoYComa ; 2 , epsilon"
         },
         {
             "first": {
@@ -819,7 +821,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_true,tk_true;2,epsilon"
+            "string": "2 , tk_true , tk_true ; 2 , epsilon"
         },
         {
             "first": {
@@ -832,7 +834,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_false,tk_false;2,epsilon"
+            "string": "2 , tk_false , tk_false ; 2 , epsilon"
         },
         {
             "first": {
@@ -845,7 +847,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_Numero,tk_Numero;2,epsilon"
+            "string": "2 , tk_Numero , tk_Numero ; 2 , epsilon"
         },
         {
             "first": {
@@ -858,7 +860,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_Cadena,tk_Cadena;2,epsilon"
+            "string": "2 , tk_Cadena , tk_Cadena ; 2 , epsilon"
         },
         {
             "first": {
@@ -871,7 +873,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_if, tk_if; 2, epsilon"
+            "string": "2 , tk_if , tk_if ; 2 , epsilon"
         },
         {
             "first": {
@@ -884,7 +886,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_ParentesisA, tk_ParentesisA; 2, epsilon"
+            "string": "2 , tk_ParentesisA , tk_ParentesisA ; 2 , epsilon"
         },
         {
             "first": {
@@ -897,7 +899,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_ParentesisC, tk_ParentesisC; 2, epsilon"
+            "string": "2 , tk_ParentesisC , tk_ParentesisC ; 2 , epsilon"
         },
         {
             "first": {
@@ -910,7 +912,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_LlaveA, tk_LlaveA; 2, epsilon"
+            "string": "2 , tk_LlaveA , tk_LlaveA ; 2 , epsilon"
         },
         {
             "first": {
@@ -923,7 +925,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2,tk_LlaveC, tk_LlaveC; 2, epsilon"
+            "string": "2 , tk_LlaveC , tk_LlaveC ; 2 , epsilon"
         },
         {
             "first": {
@@ -936,7 +938,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_while, tk_while; 2, epsilon"
+            "string": "2 , tk_while , tk_while ; 2 , epsilon"
         },
         {
             "first": {
@@ -949,7 +951,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_foreach, tk_foreach; 2, epsilon"
+            "string": "2 , tk_foreach , tk_foreach ; 2 , epsilon"
         },
         {
             "first": {
@@ -962,7 +964,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_in, tk_in; 2, epsilon"
+            "string": "2 , tk_in , tk_in ; 2 , epsilon"
         },
         {
             "first": {
@@ -975,7 +977,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_Switch, tk_Switch; 2, epsilon"
+            "string": "2 , tk_Switch , tk_Switch ; 2 , epsilon"
         },
         {
             "first": {
@@ -988,7 +990,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_Case, tk_Case; 2, epsilon"
+            "string": "2 , tk_Case , tk_Case ; 2 , epsilon"
         },
         {
             "first": {
@@ -1001,7 +1003,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_DosPuntos, tk_DosPuntos; 2, epsilon"
+            "string": "2 , tk_DosPuntos , tk_DosPuntos ; 2 , epsilon"
         },
         {
             "first": {
@@ -1014,7 +1016,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_Default, tk_Default; 2, epsilon"
+            "string": "2 , tk_Default , tk_Default ; 2 , epsilon"
         },
         {
             "first": {
@@ -1027,7 +1029,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_Break, tk_Break; 2, epsilon"
+            "string": "2 , tk_Break , tk_Break ; 2 , epsilon"
         },
         {
             "first": {
@@ -1040,7 +1042,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_Flecha, tk_Flecha; 2, epsilon"
+            "string": "2 , tk_Flecha , tk_Flecha ; 2 , epsilon"
         },
         {
             "first": {
@@ -1053,7 +1055,7 @@ class Memomry:
                 "insertoPila": "epsilon"
             },
 
-            "string": "2, tk_coma, tk_coma; 2, epsilon"
+            "string": "2,  tk_coma , tk_coma ; 2 , epsilon"
         }
     ]
 

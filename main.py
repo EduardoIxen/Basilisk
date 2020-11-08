@@ -3,6 +3,7 @@ from CargarArchivo import *
 from Reporte import *
 from Pila import *
 from graphviz import Digraph
+from tabulate import *
 
 
 def main():
@@ -50,6 +51,7 @@ def cargarArchivo():
     cargar = CargarArchivo()
     cargar.cargarArchivo(ruta)
     #print(Memomry.content_script)
+
 
 def manejoAFD():
     startComent = 0
@@ -331,7 +333,9 @@ def AP():
     noTerminales = Memomry.noTerminales
     pila = Pila()
     estado = 0
+    Memomry.reporteEntrada = listToken
 
+    primeraTrancicion()
     if estado == 0:
         for trancicion in tranciociones:
             if trancicion["first"]["estado"] == 0:
@@ -357,8 +361,13 @@ def AP():
         if len(listToken) == 0:
 
             if pila.obtenerUltimoAgregado() == "#":
-                print(f"{pila.getItems()} ----Entrada valida----")
+                #print(f"{pila.getItems()} ----Entrada valida----")
+                mostrarTrancicion(pila, "2, epsilon, # ; 3 , epsilon")
+                print("---------------- ENTRADA VALIDA ----------------")
                 input()
+                rep = Reporte()
+                Memomry.createReport = True
+                rep.crearHtml(Memomry.reporteAP, "ReporteAutomataPila")
             elif pila.obtenerUltimoAgregado() == "S":
                 quitNT(pila, pila.obtenerUltimoAgregado(), "epsilon", listToken)
                 continue
@@ -640,9 +649,24 @@ def cambioNT(pila, cadenaTrans, cont, addListOrWord):
         input()
 
 def mostrarTrancicion(pila, trancicion):
-    print(f"{pila.getItems()} ----- {trancicion}")
+    #print(f"{pila.getItems()} ----- {trancicion}")
+    cadEntrada = ""
+    cadPL = []
+    for tk in Memomry.reporteEntrada:
+        cadEntrada += tk["Nombre"] + " , "
+    cadPL = pila.getItems()
+    #print(pila.getItems())
+
+    dic = {"1": [pila.getPilaReporte()], "2": [cadEntrada], "3": [trancicion]}
+    dic2 = {"PILA": [pila.getPilaReporte()], "ENTRADA": [cadEntrada], "TRANCICION": [trancicion]}
+    print(tabulate(dic, tablefmt='fancy_grid'))
+    Memomry.reporteAP.append(dic2)
 
 
+def primeraTrancicion():
+    dic = {"1": [".      PILA        ."], "2": [".     ENTRADA     ."], "3": [".     TRANCICION      ."]}
+    print(tabulate(dic, tablefmt='fancy_grid'))
+    #Memomry.reporteAP.append(dic)
 
 def diagrama():
     print("CREANDO DIAGRAMA...\n")
