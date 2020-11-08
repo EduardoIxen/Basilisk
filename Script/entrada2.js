@@ -58,7 +58,8 @@ switch(identidicador) {
 			const _aceptado = true;
 		}
 	default:
-		var def1 = "Hola def";
+	    if (true){
+	    }
 	    break;
 }
 switch(id){

@@ -2,11 +2,116 @@ digraph {
 	node [shape=box]
 	{
 		rank=same
-		1 [label="Definicion: funcion1"]
+		1 [label="Definicion: funcion2222"]
+		1 -> 3
+	}
+	{
+		rank=same
+		3 [label="Llamada print"]
+		3 -> 5
+	}
+	{
+		rank=same
+		5 [label="Sentencia switch"]
+		5 -> 20
+	}
+	{
+		rank=same
+		20 [label="Llamada print"]
+		20 -> 22
+	}
+	{
+		rank=same
+		22 [label="Definicion: funcion1"]
 	}
 	{
 		rank=2
-		2 [label="Parametros: parametr1"]
+		2 [label="Parametros: parametr1, \"cadena\", true, 12"]
 		1 -> 2
+	}
+	{
+		rank=2
+		4 [label="Parametros: identificador, true, 12, \"cadena\""]
+		3 -> 4
+	}
+	{
+		rank=2
+		6 [label="Condicion: identidicador"]
+		5 -> 6
+	}
+	{
+		rank=2
+		16 [label="Case 2"]
+		15 -> 16
+	}
+	{
+		rank=2
+		17 [label="Sentencia if"]
+		16 -> 17
+	}
+	{
+		rank=2
+		21 [label="Parametros: true, identificador, 12, \"cadena\""]
+		20 -> 21
+	}
+	{
+		rank=2
+		23 [label="Parametros: parametr1, true"]
+		22 -> 23
+	}
+	{
+		rank=3
+		7 [label="Case 1"]
+		6 -> 7
+	}
+	{
+		rank=3
+		8 [label="Asignacion: vasSwitch"]
+		7 -> 8
+	}
+	{
+		rank=3
+		18 [label="Condicion: id"]
+		17 -> 18
+	}
+	{
+		rank=3
+		19 [label="Asignacion: _aceptado"]
+		18 -> 19
+	}
+	{
+		rank=4
+		9 [label="Case true"]
+		8 -> 9
+	}
+	{
+		rank=4
+		10 [label="Asignacion: vasSwitch2"]
+		9 -> 10
+	}
+	{
+		rank=5
+		11 [label="Case \"PruebaCaseCadena\""]
+		10 -> 11
+	}
+	{
+		rank=5
+		12 [label="Asignacion: _idSW"]
+		11 -> 12
+	}
+	{
+		rank=5
+		13 [label="Sentencia if"]
+		12 -> 13
+	}
+	{
+		rank=6
+		14 [label="Condicion: identidicador"]
+		13 -> 14
+	}
+	{
+		rank=6
+		15 [label="Asignacion: variable2"]
+		14 -> 15
 	}
 }

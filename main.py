@@ -234,7 +234,7 @@ def manejoAFD():
                                 estado = 0
                 except:
                     print("no exixte")
-
+                    print("numlin", num_linea)
             elif estado == 3:
                 if current != '"':
                     cadena += current
@@ -789,7 +789,7 @@ def diagrama():
                 nodos.append(nodo)
                 ifOn = False #quitar si arruina toodo
                 whileOn = False
-            elif parametros == True:
+            elif parametros == True or parametrosLlamada == True:
                 listParametros.append(temp[i]["Valor"])
 
         elif temp[i]["Nombre"] == "tk_LlaveC":
@@ -853,18 +853,19 @@ def diagrama():
                 nodo["Padre"] = nodos[len(nodos) - 1]["Clave"]
                 nodos.append(nodo)
                 whileOn = False
-            elif parametrosLlamada:
+            elif parametrosLlamada or parametros:
                 listParametros.append(temp[i]["Valor"])
         elif temp[i]["Nombre"] == "tk_Numero":
-            if parametrosLlamada:
+            if parametrosLlamada or parametros:
                 listParametros.append(temp[i]["Valor"])
         elif temp[i]["Nombre"] == "tk_Cadena":
-            if parametrosLlamada and temp[i - 1]["Nombre"] != "tk_Case":
-                listParametros.append(temp[i]["Valor"])
-                #print("Entro a la caadena, ", contId)
+            if parametrosLlamada or parametros:
+                    if temp[i - 1]["Nombre"] != "tk_Case":
+                        listParametros.append(temp[i]["Valor"])
+                        #print("Entro a la caadena, ", contId)
         elif temp[i]["Nombre"] == "tk_Case":
             nivel += 1
-            sumNivel(nivel,listNivel)
+            sumNivel(nivel, listNivel)
             contId += 1
             nodo = {}
             nodo["Nivel"] = nivel
