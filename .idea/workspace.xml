@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9ef8db34-f8fb-4531-860c-f7f490666026" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reportes/Errores_Encontrados.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reportes/Prueba" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reportes/Prueba.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reportes/ReporteAutomataPila.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Reportes/Tokens_Validos.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reportes/Errores_Encontrados.html" beforeDir="false" afterPath="$PROJECT_DIR$/Reportes/Errores_Encontrados.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Reportes/Tokens_Validos.html" beforeDir="false" afterPath="$PROJECT_DIR$/Reportes/Tokens_Validos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Script/entrada4.js" beforeDir="false" afterPath="$PROJECT_DIR$/Script/entrada4.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>

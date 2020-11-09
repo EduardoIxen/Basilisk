@@ -1,5 +1,5 @@
 let @ variable1 = true;
-if (true) + { #
+if (true) + { ¿
     & print("Archivo de prueba!!");
 }
 %

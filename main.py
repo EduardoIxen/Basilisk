@@ -233,11 +233,12 @@ def manejoAFD():
                                 cadena = ''
                                 estado = 0
                 except:
-                    #print("no exixte")
-                    #print("numlin", num_linea)
-                    newError = {'Error': current, 'Linea': num_linea, 'Columna': columna}
+                    print("no exixte", current + " --" + cadena)
+                    print("numlin", num_linea)
+                    newError = {'Error': cadena, 'Linea': num_linea, 'Columna': columna}
                     errores.append(newError)
                     cadena = ''
+                    estado = 0
                     ff = 0
             elif estado == 3:
                 if current != '"':
