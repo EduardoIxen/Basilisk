@@ -158,7 +158,7 @@ def manejoAFD():
                                 estado = 0
                                 cadena = ''
                     except:
-                        print("catch en estado 6")
+                        print("Error con los numeros")
                 else:
                     if current != " " and current != "\n" and current != "\t":
                         newError = {'Error': current, 'Linea': num_linea, 'Columna': columna}
@@ -233,8 +233,12 @@ def manejoAFD():
                                 cadena = ''
                                 estado = 0
                 except:
-                    print("no exixte")
-                    print("numlin", num_linea)
+                    #print("no exixte")
+                    #print("numlin", num_linea)
+                    newError = {'Error': current, 'Linea': num_linea, 'Columna': columna}
+                    errores.append(newError)
+                    cadena = ''
+                    ff = 0
             elif estado == 3:
                 if current != '"':
                     cadena += current

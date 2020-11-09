@@ -1,32 +1,5 @@
-let _id1 = 12;
-var _id2 = "Tomas";
-const funcion1 = (parametro1,parametro2){
-    /*contenido*/
-
-    @
+let @ variable1 = true;
+if (true) + { #
+    & print("Archivo de prueba!!");
 }
-if (id) {
-    /*contenido*/
-    if(pruebaNivel){
-    }
-}
-while (id2) {
-
-}
-foreach(elemento in coleccion) {
-
-}
-
-switch (id3) {
-
-}
-print();
-if (true) {
-
-}
-if (false) {
-
-}
-while(true){
-}
-funcionPrueba(4, 3, true, variable1, "Holaaa");
+%
