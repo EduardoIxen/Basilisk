@@ -57,10 +57,7 @@ switch(identidicador) {
 		if(id){
 			const _aceptado = true;
 		}
-	default:
-	    if (true){
-	    }
-	    break;
+
 }
 switch(id){
 	case 1:

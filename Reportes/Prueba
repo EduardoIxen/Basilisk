@@ -1,117 +1,487 @@
 digraph {
-	node [shape=box]
+	node [height=1.5 shape=box width=1.5]
 	{
 		rank=same
-		1 [label="Definicion: funcion2222"]
-		1 -> 3
-	}
-	{
-		rank=same
-		3 [label="Llamada print"]
-		3 -> 5
-	}
-	{
-		rank=same
-		5 [label="Sentencia switch"]
-		5 -> 20
-	}
-	{
-		rank=same
-		20 [label="Llamada print"]
-		20 -> 22
-	}
-	{
-		rank=same
-		22 [label="Definicion: funcion1"]
-	}
-	{
-		rank=2
-		2 [label="Parametros: parametr1, \"cadena\", true, 12"]
+		1 [label="Asignacion: _identificador1"]
 		1 -> 2
 	}
 	{
-		rank=2
-		4 [label="Parametros: identificador, true, 12, \"cadena\""]
+		rank=same
+		2 [label="Asignacion: identificador2"]
+		2 -> 3
+	}
+	{
+		rank=same
+		3 [label="Asignacion: identificador_3"]
 		3 -> 4
 	}
 	{
-		rank=2
-		6 [label="Condicion: identidicador"]
+		rank=same
+		4 [label="Asignacion: _three_3_33"]
+		4 -> 5
+	}
+	{
+		rank=same
+		5 [label="Asignacion: _four_4_44"]
 		5 -> 6
 	}
 	{
-		rank=2
-		16 [label="Case 2"]
-		15 -> 16
+		rank=same
+		6 [label="Sentencia if"]
+		6 -> 13
+	}
+	{
+		rank=same
+		13 [label="Sentencia if"]
+		13 -> 16
+	}
+	{
+		rank=same
+		16 [label="Sentencia if"]
+		16 -> 22
+	}
+	{
+		rank=same
+		22 [label="Sentencia while"]
+		22 -> 27
+	}
+	{
+		rank=same
+		27 [label="Sentencia while"]
+		27 -> 34
+	}
+	{
+		rank=same
+		34 [label="Sentencia foreach"]
+		34 -> 41
+	}
+	{
+		rank=same
+		41 [label="Sentencia switch"]
+		41 -> 56
+	}
+	{
+		rank=same
+		56 [label="Sentencia switch"]
+		56 -> 62
+	}
+	{
+		rank=same
+		62 [label="Definicion: funcion1"]
+		62 -> 67
+	}
+	{
+		rank=same
+		67 [label="Definicion: funcion2"]
+		67 -> 72
+	}
+	{
+		rank=same
+		72 [label="Definicion: funcion3"]
+		72 -> 77
+	}
+	{
+		rank=same
+		77 [label="Definicion: funcion4"]
+		77 -> 82
+	}
+	{
+		rank=same
+		82 [label="Definicion: funcion4"]
+		82 -> 87
+	}
+	{
+		rank=same
+		87 [label="Llamada funcion1"]
+		87 -> 89
+	}
+	{
+		rank=same
+		89 [label="Llamada funcion2"]
+		89 -> 91
+	}
+	{
+		rank=same
+		91 [label="Llamada funcion3"]
+		91 -> 93
+	}
+	{
+		rank=same
+		93 [label="Llamada funcion4"]
+		93 -> 95
+	}
+	{
+		rank=same
+		95 [label="Asignacion: prueba"]
+		95 -> 96
+	}
+	{
+		rank=same
+		96 [label="Asignacion: prueba2"]
+		96 -> 97
+	}
+	{
+		rank=same
+		97 [label="Asignacion: prueba3"]
 	}
 	{
 		rank=2
-		17 [label="Sentencia if"]
+		7 [label="Condicion: id"]
+		6 -> 7
+	}
+	{
+		rank=2
+		8 [label="Llamada print"]
+		7 -> 8
+	}
+	{
+		rank=2
+		10 [label="Sentencia foreach"]
+		9 -> 10
+	}
+	{
+		rank=2
+		14 [label="Condicion: true"]
+		13 -> 14
+	}
+	{
+		rank=2
+		15 [label="Asignacion: variable"]
+		14 -> 15
+	}
+	{
+		rank=2
+		17 [label="Condicion: false"]
 		16 -> 17
 	}
 	{
 		rank=2
-		21 [label="Parametros: true, identificador, 12, \"cadena\""]
-		20 -> 21
-	}
-	{
-		rank=2
-		23 [label="Parametros: parametr1, true"]
-		22 -> 23
-	}
-	{
-		rank=3
-		7 [label="Case 1"]
-		6 -> 7
-	}
-	{
-		rank=3
-		8 [label="Asignacion: vasSwitch"]
-		7 -> 8
-	}
-	{
-		rank=3
-		18 [label="Condicion: id"]
+		18 [label="Sentencia while"]
 		17 -> 18
 	}
 	{
-		rank=3
-		19 [label="Asignacion: _aceptado"]
-		18 -> 19
+		rank=2
+		23 [label="Condicion: identidicador"]
+		22 -> 23
 	}
 	{
-		rank=4
-		9 [label="Case true"]
+		rank=2
+		24 [label="Sentencia if"]
+		23 -> 24
+	}
+	{
+		rank=2
+		28 [label="Condicion: true"]
+		27 -> 28
+	}
+	{
+		rank=2
+		29 [label="Definicion: funcion"]
+		28 -> 29
+	}
+	{
+		rank=2
+		35 [label="elemento in coleccion"]
+		34 -> 35
+	}
+	{
+		rank=2
+		36 [label="Sentencia if"]
+		35 -> 36
+	}
+	{
+		rank=2
+		42 [label="Condicion: identidicador"]
+		41 -> 42
+	}
+	{
+		rank=2
+		52 [label="Case 2"]
+		51 -> 52
+	}
+	{
+		rank=2
+		53 [label="Sentencia if"]
+		52 -> 53
+	}
+	{
+		rank=2
+		57 [label="Condicion: id"]
+		56 -> 57
+	}
+	{
+		rank=2
+		63 [label="Parametros: parametro1"]
+		62 -> 63
+	}
+	{
+		rank=2
+		64 [label="Sentencia if"]
+		63 -> 64
+	}
+	{
+		rank=2
+		68 [label="Parametros: parametro1, parametro2"]
+		67 -> 68
+	}
+	{
+		rank=2
+		69 [label="Sentencia if"]
+		68 -> 69
+	}
+	{
+		rank=2
+		73 [label="Parametros: parametro1, \"parametro2\", parametro3"]
+		72 -> 73
+	}
+	{
+		rank=2
+		74 [label="Sentencia if"]
+		73 -> 74
+	}
+	{
+		rank=2
+		78 [label="Parametros: "]
+		77 -> 78
+	}
+	{
+		rank=2
+		79 [label="Sentencia if"]
+		78 -> 79
+	}
+	{
+		rank=2
+		83 [label="Parametros: true, cadena, \"cadena\""]
+		82 -> 83
+	}
+	{
+		rank=2
+		84 [label="Sentencia if"]
+		83 -> 84
+	}
+	{
+		rank=2
+		88 [label="Parametros: true, 12, \"Primera\""]
+		87 -> 88
+	}
+	{
+		rank=2
+		90 [label="Parametros: false, 22, \"segunda\""]
+		89 -> 90
+	}
+	{
+		rank=2
+		92 [label="Parametros: \"Primera\", _identificador1, \"Tercera\", \"Cuarta\""]
+		91 -> 92
+	}
+	{
+		rank=2
+		94 [label="Parametros: 12, 3, 21, false"]
+		93 -> 94
+	}
+	{
+		rank=3
+		9 [label="Parametros: "]
 		8 -> 9
 	}
 	{
-		rank=4
-		10 [label="Asignacion: vasSwitch2"]
-		9 -> 10
-	}
-	{
-		rank=5
-		11 [label="Case \"PruebaCaseCadena\""]
+		rank=3
+		11 [label="cad in elementos"]
 		10 -> 11
 	}
 	{
-		rank=5
-		12 [label="Asignacion: _idSW"]
+		rank=3
+		12 [label="Asignacion: _variable1"]
 		11 -> 12
 	}
 	{
+		rank=3
+		19 [label="Condicion: id"]
+		18 -> 19
+	}
+	{
+		rank=3
+		20 [label="Llamada print"]
+		19 -> 20
+	}
+	{
+		rank=3
+		25 [label="Condicion: id"]
+		24 -> 25
+	}
+	{
+		rank=3
+		26 [label="Asignacion: _var_1"]
+		25 -> 26
+	}
+	{
+		rank=3
+		30 [label="Parametros: p1, p2"]
+		29 -> 30
+	}
+	{
+		rank=3
+		31 [label="Sentencia if"]
+		30 -> 31
+	}
+	{
+		rank=3
+		37 [label="Condicion: id"]
+		36 -> 37
+	}
+	{
+		rank=3
+		38 [label="Sentencia while"]
+		37 -> 38
+	}
+	{
+		rank=3
+		43 [label="Case 1"]
+		42 -> 43
+	}
+	{
+		rank=3
+		44 [label="Asignacion: vasSwitch"]
+		43 -> 44
+	}
+	{
+		rank=3
+		54 [label="Condicion: id"]
+		53 -> 54
+	}
+	{
+		rank=3
+		55 [label="Asignacion: _aceptado"]
+		54 -> 55
+	}
+	{
+		rank=3
+		58 [label="Case 1"]
+		57 -> 58
+	}
+	{
+		rank=3
+		59 [label="Asignacion: _identificador_sw"]
+		58 -> 59
+	}
+	{
+		rank=3
+		65 [label="Condicion: id"]
+		64 -> 65
+	}
+	{
+		rank=3
+		66 [label="Asignacion: _nombre"]
+		65 -> 66
+	}
+	{
+		rank=3
+		70 [label="Condicion: id"]
+		69 -> 70
+	}
+	{
+		rank=3
+		71 [label="Asignacion: _nombre"]
+		70 -> 71
+	}
+	{
+		rank=3
+		75 [label="Condicion: id"]
+		74 -> 75
+	}
+	{
+		rank=3
+		76 [label="Asignacion: _apellido"]
+		75 -> 76
+	}
+	{
+		rank=3
+		80 [label="Condicion: id"]
+		79 -> 80
+	}
+	{
+		rank=3
+		81 [label="Asignacion: _apellido"]
+		80 -> 81
+	}
+	{
+		rank=3
+		85 [label="Condicion: id"]
+		84 -> 85
+	}
+	{
+		rank=3
+		86 [label="Asignacion: _apellido"]
+		85 -> 86
+	}
+	{
+		rank=4
+		21 [label="Parametros: \"hola mundo\""]
+		20 -> 21
+	}
+	{
+		rank=4
+		32 [label="Condicion: true"]
+		31 -> 32
+	}
+	{
+		rank=4
+		33 [label="Asignacion: _var"]
+		32 -> 33
+	}
+	{
+		rank=4
+		39 [label="Condicion: true"]
+		38 -> 39
+	}
+	{
+		rank=4
+		40 [label="Asignacion: aceptado"]
+		39 -> 40
+	}
+	{
+		rank=4
+		45 [label="Case true"]
+		44 -> 45
+	}
+	{
+		rank=4
+		46 [label="Asignacion: vasSwitch2"]
+		45 -> 46
+	}
+	{
+		rank=4
+		60 [label="Case 2"]
+		59 -> 60
+	}
+	{
+		rank=4
+		61 [label="Asignacion: _caso"]
+		60 -> 61
+	}
+	{
 		rank=5
-		13 [label="Sentencia if"]
-		12 -> 13
+		47 [label="Case \"PruebaCaseCadena\""]
+		46 -> 47
+	}
+	{
+		rank=5
+		48 [label="Asignacion: _idSW"]
+		47 -> 48
+	}
+	{
+		rank=5
+		49 [label="Sentencia if"]
+		48 -> 49
 	}
 	{
 		rank=6
-		14 [label="Condicion: identidicador"]
-		13 -> 14
+		50 [label="Condicion: identidicador"]
+		49 -> 50
 	}
 	{
 		rank=6
-		15 [label="Asignacion: variable2"]
-		14 -> 15
+		51 [label="Asignacion: variable2"]
+		50 -> 51
 	}
 }

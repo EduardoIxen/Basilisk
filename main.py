@@ -895,7 +895,7 @@ def diagrama():
 
     #print("nodos",nodo)
     dot = Digraph(filename="Prueba", format='png')
-    dot.attr('node', shape='box')
+    dot.attr('node', shape='box', width='1.5', height='1.5')
 
     temp = []
     for nd in nodos:
