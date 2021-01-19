@@ -1,4 +1,4 @@
-# Gramatica Basilisk
+# Gramática Basilisk
 
 
     S => DECLARACION_VARIABLE, S
